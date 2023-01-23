@@ -4,6 +4,7 @@ import App from "./App";
 import { useAppDispatch } from "./app/hooks";
 import { Counter } from "./features/counter/Counter";
 import { increment } from "./features/counter/counterSlice";
+import CallbackPage from "./Pages/Callback/Callback.page";
 import ContactPage from "./Pages/Contact/Contact.page";
 import ErrorPage from "./Pages/Error/Error.page";
 
@@ -16,9 +17,12 @@ const AppRouter: FC<AppRouterProps> = () => {
         {
             path: "/",
             element: <App />,
+            // we can access the data we return
+            // here in useLoaderData() in the component! 
+            // How fuckin' cool is that?!?!
             loader: () => {
-                console.log("hit")
-              dispatch(increment())
+                console.log("hit");
+                dispatch(increment())
                 return null;
             },
             errorElement: <ErrorPage />,
@@ -28,8 +32,11 @@ const AppRouter: FC<AppRouterProps> = () => {
                     element: <Counter />,
                 },
             ]
-        },
-    ]);
+        }, {
+            path: "/callback",
+            element: <CallbackPage />,
+            errorElement: <ErrorPage />,
+        }]);
 
     return <RouterProvider router={routes} />
 }
