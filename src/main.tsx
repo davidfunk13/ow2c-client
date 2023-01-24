@@ -6,7 +6,7 @@ import App from './App'
 import AppRouter from './AppRouter'
 import appRouter from './AppRouter'
 import './index.css'
-import { store } from './app/store';
+import { store } from './redux/store';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

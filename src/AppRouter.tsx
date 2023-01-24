@@ -1,12 +1,10 @@
 import React, { FC } from "react";
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import App from "./App";
-import { useAppDispatch } from "./app/hooks";
-import { Counter } from "./features/counter/Counter";
-import { increment } from "./features/counter/counterSlice";
-import CallbackPage from "./Pages/Callback/Callback.page";
-import ContactPage from "./Pages/Contact/Contact.page";
-import ErrorPage from "./Pages/Error/Error.page";
+import { useAppDispatch } from "./redux/hooks";
+import CallbackPage from "./pages/Callback/Callback.page";
+import ContactPage from "./pages/Contact/Contact.page";
+import ErrorPage from "./pages/Error/Error.page";
 
 interface AppRouterProps { }
 
@@ -22,14 +20,14 @@ const AppRouter: FC<AppRouterProps> = () => {
             // How fuckin' cool is that?!?!
             loader: () => {
                 console.log("hit");
-                dispatch(increment())
+                // dispatch(increment())
                 return null;
             },
             errorElement: <ErrorPage />,
             children: [
                 {
                     path: "contacts",
-                    element: <Counter />,
+                    element:<>poop</>,
                 },
             ]
         }, {
