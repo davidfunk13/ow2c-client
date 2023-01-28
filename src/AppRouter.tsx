@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { createBrowserRouter, RouterProvider, } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, useLocation, useParams, } from "react-router-dom";
 import App from "./App";
 import { useAppDispatch } from "./redux/hooks";
 import CallbackPage from "./pages/Callback/Callback.page";
@@ -10,29 +10,33 @@ interface AppRouterProps { }
 
 const AppRouter: FC<AppRouterProps> = () => {
     const dispatch = useAppDispatch();
-
     const routes = createBrowserRouter([
         {
             path: "/",
             element: <App />,
-            // we can access the data we return
-            // here in useLoaderData() in the component! 
-            // How fuckin' cool is that?!?!
+           
             loader: () => {
-                console.log("hit");
-                // dispatch(increment())
                 return null;
             },
             errorElement: <ErrorPage />,
             children: [
                 {
                     path: "contacts",
-                    element:<>poop</>,
+                    element: <>poop</>,
                 },
             ]
         }, {
+            
             path: "/callback",
             element: <CallbackPage />,
+            // we can access the data we return
+            // here in useLoaderData() in the component! 
+            // How fuckin' cool is that?!?!
+            loader: () => {
+
+                // dispatch(increment())
+                return null;
+            },
             errorElement: <ErrorPage />,
         }]);
 

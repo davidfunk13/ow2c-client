@@ -10,12 +10,10 @@ interface AuthResponse {
 
 export const authApi = api.injectEndpoints({
     endpoints: (build) => ({
-        getLogin: build.query<{ code: string }, AuthResponse>({
+        getLogin: build.query<AuthResponse, string>({
             query: (code) => ({
-                url: `/auth/login?code=${code}`,
+                url: `/login?code=${code}`,
                 method: "POST",
-                // `/auth/login?code=${code}`
-                params: code
             }),
             // transformResponse: (response: { data: Post }, meta, arg) => response.data,
             // providesTags: (result) => {

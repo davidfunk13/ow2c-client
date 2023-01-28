@@ -1,4 +1,5 @@
 import { BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
+import { setErrorSnackbar } from "../slices/notificationsSlice";
 import { RootState } from "../store";
 
 // Create our baseQuery instance
@@ -9,6 +10,7 @@ const baseQuery = fetchBaseQuery({
         const token = (getState() as RootState).auth.token;
 
         if (token) {
+            console.log("token set")
             headers.set("Authorization", token);
         }
 
@@ -21,6 +23,10 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     
     let result = await baseQuery(args, api, extraOptions);
 
+    if(result.meta?.response?.status === 401) {
+        dispatch(setErrorSnackbar("Unauthorized: Something went wrong."))
+        window.location.href = "/"
+    }
     return result;
 };
 
