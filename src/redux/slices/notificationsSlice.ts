@@ -27,6 +27,7 @@ export const notificationsSlice = createSlice({
             state.variant = action.payload;
         },
         setErrorSnackbar: (state, action) => {
+            state.open = true;
             state.variant = "error";
             state.message = action.payload;
         },

@@ -14,11 +14,10 @@ const CallbackPage: FC<CallbackPageProps> = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    console.log(code);
-
     useEffect(() => {
         if (!code) {
-            navigate("/");
+            dispatch(setErrorSnackbar("Something went wrong."));
+            // navigate("/");
         }
     }, [])
 

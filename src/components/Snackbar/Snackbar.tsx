@@ -1,11 +1,11 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Snackbar as MUISnackbar } from "@mui/material";
 import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { initialState, selectSnackbarMessage, selectSnackbarVariant, setSnackbarMessage, setSnackbarVariant } from "../../redux/slices/notificationsSlice";
 
 interface IAppSnackbar { }
 
-const AppSnackbar: FC<IAppSnackbar> = () => {
+const Snackbar: FC<IAppSnackbar> = () => {
     const dispatch = useAppDispatch();
     const snackbarMessage = useAppSelector(selectSnackbarMessage);
     const snackbarVariant = useAppSelector(selectSnackbarVariant);
@@ -19,7 +19,7 @@ const AppSnackbar: FC<IAppSnackbar> = () => {
     ///yooooou need to rework this into a snackbar stack, because its way better looking than having the message change as its closing from the previous timeout..
 
     return (
-        <Snackbar
+        <MUISnackbar
             data-testid={"snackbar"}
             open={snackbarOpen}
             autoHideDuration={2000}
@@ -29,8 +29,8 @@ const AppSnackbar: FC<IAppSnackbar> = () => {
             <Alert data-testid={"snackbar-message"} severity={snackbarVariant} onClose={handleCloseSnackbar}>
                 {snackbarMessage}
             </Alert>
-        </Snackbar>
+        </MUISnackbar>
     );
 };
 
-export default AppSnackbar;
+export default Snackbar;
