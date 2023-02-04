@@ -3,7 +3,7 @@ import { FC, useEffect } from "react";
 import { Form, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { useGetLoginQuery } from "../../redux/services/authApi";
-import { setAuthenticatedBattletag } from "../../redux/slices/authSlice";
+import { setBattletag } from "../../redux/slices/battletagSlice";
 import { setErrorSnackbar, setSnackbarMessage, setSuccessSnackbar } from "../../redux/slices/notificationsSlice";
 
 interface CallbackPageProps { }
@@ -24,9 +24,9 @@ const CallbackPage: FC<CallbackPageProps> = () => {
     const { data, isLoading } = useGetLoginQuery(code);
 
     useEffect(() => {
-        if (data?.token) {
-            dispatch(setAuthenticatedBattletag(data));
-            dispatch(setSuccessSnackbar(data.message))
+        if (data?.battletag) {
+            dispatch(setBattletag(data));
+            dispatch(setSuccessSnackbar("Battletag successfully logged in."))
             return navigate("/");
         }
     }, [data]);

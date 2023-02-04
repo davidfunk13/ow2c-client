@@ -5,6 +5,7 @@ import { useAppDispatch } from "./redux/hooks";
 import CallbackPage from "./pages/Callback/Callback.page";
 import ContactPage from "./pages/Contact/Contact.page";
 import ErrorPage from "./pages/Error/Error.page";
+import TestPage from "./pages/Test/Test.page";
 
 interface AppRouterProps { }
 
@@ -14,7 +15,7 @@ const AppRouter: FC<AppRouterProps> = () => {
         {
             path: "/",
             element: <App />,
-           
+
             loader: () => {
                 return null;
             },
@@ -25,8 +26,9 @@ const AppRouter: FC<AppRouterProps> = () => {
                     element: <>poop</>,
                 },
             ]
-        }, {
-            
+        },
+        {
+
             path: "/callback",
             element: <CallbackPage />,
             // we can access the data we return
@@ -38,7 +40,14 @@ const AppRouter: FC<AppRouterProps> = () => {
                 return null;
             },
             errorElement: <ErrorPage />,
-        }]);
+        },
+        {
+
+            path: "/test",
+            element: <TestPage />,
+            errorElement: <ErrorPage />,
+        }
+    ]);
 
     return <RouterProvider router={routes} />
 }
