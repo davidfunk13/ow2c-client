@@ -1,30 +1,42 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../redux/store'
 import Battletag from '../../types/Battletag'
 
 interface BattletagState {
-    battletag: Battletag
+    id: Battletag['id']
+    battletag_id: Battletag['battletag_id']
+    battletag: Battletag['battletag']
 }
 
 const initialState: BattletagState = {
-    battletag: <Battletag>{},
+    id: "",
+    battletag_id: 0,
+    battletag: ""
 }
 
-export const authSlice = createSlice({
+export const battletagSlice = createSlice({
     name: 'battletag',
     initialState,
     reducers: {
-        setBattletag: (state, action) => {
+        setBattletag: (state, action: PayloadAction<Battletag>) => {
+            state.id = action.payload.id;
+            state.battletag_id = action.payload.battletag_id;
             state.battletag = action.payload.battletag;
+        },
+        resetBattletagSlice: (state) => {
+            localStorage.removeItem('id');
+            localStorage.removeItem('battletag');
+            localStorage.removeItem('battletag_id');
+            state.battletag = initialState.battletag;
         }
     },
 })
 
-export const { setBattletag } = authSlice.actions
+export const { setBattletag, resetBattletagSlice } = battletagSlice.actions
 
-export const selectBattletagName = (state: RootState) => state.auth.battletag.battletag
-export const selectBattletagId = (state: RootState) => state.auth.battletag.battletag_id
-export const selectBattletagSub = (state: RootState) => state.auth.battletag.sub
-export const selectFullBattletag = (state: RootState) => state.auth.battletag;
+export const selectBattletagName = (state: RootState) => state.battletag.battletag
+export const selectBattletagId = (state: RootState) => state.battletag.id
+export const selectBattletagBattletagId = (state: RootState) => state.battletag.battletag_id
+export const selectFullBattletag = (state: RootState) => state.battletag.battletag;
 
-export default authSlice.reducer
+export default battletagSlice.reducer

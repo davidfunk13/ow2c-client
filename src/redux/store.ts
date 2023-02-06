@@ -3,12 +3,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { api } from './services/api'
 import battletagSlice from './slices/battletagSlice'
+import drawerSlice from './slices/drawerSlice'
 import notificationsSlice from './slices/notificationsSlice'
-// ...
 
 export const store = configureStore({
   reducer: {
     battletag: battletagSlice,
+    drawer: drawerSlice,
     notifications: notificationsSlice,
     [api.reducerPath]: api.reducer,
   },

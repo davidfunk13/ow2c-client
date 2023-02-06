@@ -2,12 +2,14 @@ import { Grid, Toolbar, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC, ReactNode } from "react";
 import { useLocation } from "react-router-dom";
-import { theme } from "../theme/theme";
-import Breadcrumb from "../types/Breadcrumb";
 import useStyles from "./ViewProvider.styles";
-import clsx from 'clsx';
+import clsx from "clsx";
 import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
 import Snackbar from "../components/Snackbar/Snackbar";
+import { useAppSelector } from "../redux/hooks";
+import Breadcrumb from "../types/Breadcrumb";
+import { theme } from "../theme/theme";
+import { selectBattletagName } from "../redux/slices/battletagSlice";
 
 interface ViewProviderProps {
     children: ReactNode
@@ -18,18 +20,14 @@ interface ViewProviderProps {
 const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs = [] }: ViewProviderProps) => {
     const location = useLocation();
     const desktopBreakpoint = useMediaQuery(theme.breakpoints.up("md"));
-    // const isAuthenticated = useAppSelector(selectIsAuthenticated);
     const { classes } = useStyles();
-
+    const battletagName = useAppSelector(selectBattletagName);
     return (
-        //desktopBreakpoint && isAuthenticated
-        <Box component={"main"} className={clsx(desktopBreakpoint 
-            // && isAuthenticated 
-        ? classes.desktopContainer : classes.mobileContainer)}>
+        <Box component={"main"} className={clsx(desktopBreakpoint && battletagName ? classes.desktopContainer : classes.mobileContainer)}>
             {/* padding on view that nudges content below navbar. */}
             <Toolbar />
 
-            <Grid container spacing={2}>
+            <Grid container>
                 <Grid item xs={12}>
                     <Typography variant={"h1"}>
                         {heading}
@@ -44,11 +42,11 @@ const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs = 
                 }
 
                 {/* content */}
-                <Grid container item xs={12}>
+                <Grid paddingTop={5} container item xs={12}>
                     {children}
                 </Grid>
             </Grid>
-   
+
             <Snackbar />
         </Box>
     );

@@ -1,6 +1,6 @@
 interface Battletag {
+    id: string
     battletag_id: number
-    sub: string
     battletag: string
 }
 

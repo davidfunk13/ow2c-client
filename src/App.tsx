@@ -1,32 +1,44 @@
-import { FC } from 'react'
-import './App.css'
-import { Navigate, Outlet } from "react-router-dom";
-import { Button } from '@mui/material';
+import { FC, useEffect } from 'react'
+import { Box, Button, Grid, Toolbar, Typography, useMediaQuery } from '@mui/material';
 import authURI from './utils/authURI';
-import { useNavigate } from 'react-router-dom';
-import { useLogoutMutation } from './redux/services/authApi';
+import { useLogoutMutation, useTestQuery } from './redux/services/authApi';
+import { BrowserRouter, Outlet } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { resetBattletagSlice, selectBattletagName, setBattletag } from './redux/slices/battletagSlice';
+import { setSuccessSnackbar } from './redux/slices/notificationsSlice';
+import Snackbar from './components/Snackbar/Snackbar';
+import Navbar from './components/Navbar/Navbar';
+import DesktopNavigationMenu from './components/DesktopNavigationMenu/DesktopNavigationMenu';
+import { theme } from './theme/theme';
+import AppRouter from './AppRouter';
+import MobileNavigationMenu from './components/MobileNavigationMenu/MobileNavigationMenu';
+
 interface AppProps { }
 
 const App: FC<AppProps> = () => {
-  
-  const navigate = useNavigate();
-  const [performLogout, result] = useLogoutMutation();
+  const dispatch = useAppDispatch();
 
-  const logout = () => {
-    performLogout(null);
-  }
+  const desktopMenuBreakpoint = useMediaQuery(theme.breakpoints.up("md"));
+
+  const battletagName = useAppSelector(selectBattletagName);
+
+  const desktopMode = desktopMenuBreakpoint && battletagName;
+
+  useEffect(() => {
+    const id = localStorage.getItem('id');
+    const battletag = localStorage.getItem('battletag');
+    const battletagId = localStorage.getItem('battletag_id');
+    if (battletag && battletagId && id) {
+      dispatch(setBattletag({ battletag, id, battletag_id: +battletagId }));
+    }
+  }, [])
 
   return (
-    <>
-    {JSON.stringify(result.data)}
-      <Button href={authURI.toString()} variant='contained' color='primary'>
-        Login
-      </Button>
-      <Button onClick={() => logout()} variant='contained' color='primary'>
-        Logout
-      </Button>
-      <Outlet />
-    </>
+    <BrowserRouter>
+      <Navbar />
+      {desktopMode ? <DesktopNavigationMenu /> : <MobileNavigationMenu />}
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 

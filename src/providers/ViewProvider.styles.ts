@@ -8,7 +8,7 @@ const useStyles = makeStyles({ name: "ViewProvider Styles" })((theme) => ({
     desktopContainer: {
         padding: theme.spacing(3),
         flexGrow: 1,
-        marginLeft: theme.spacing(30)
+        marginLeft: theme.spacing(30),
     },
     breadcrumbPadding: {
         paddingLeft: theme.spacing(2)

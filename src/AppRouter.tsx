@@ -1,55 +1,19 @@
-import React, { FC } from "react";
-import { createBrowserRouter, RouterProvider, useLocation, useParams, } from "react-router-dom";
-import App from "./App";
-import { useAppDispatch } from "./redux/hooks";
-import CallbackPage from "./pages/Callback/Callback.page";
-import ContactPage from "./pages/Contact/Contact.page";
+import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
 import ErrorPage from "./pages/Error/Error.page";
-import TestPage from "./pages/Test/Test.page";
+import Home from "./pages/Home/Home";
+import createRoutes from "./utils/createRoutes";
 
 interface AppRouterProps { }
 
 const AppRouter: FC<AppRouterProps> = () => {
-    const dispatch = useAppDispatch();
-    const routes = createBrowserRouter([
-        {
-            path: "/",
-            element: <App />,
-
-            loader: () => {
-                return null;
-            },
-            errorElement: <ErrorPage />,
-            children: [
-                {
-                    path: "contacts",
-                    element: <>poop</>,
-                },
-            ]
-        },
-        {
-
-            path: "/callback",
-            element: <CallbackPage />,
-            // we can access the data we return
-            // here in useLoaderData() in the component! 
-            // How fuckin' cool is that?!?!
-            loader: () => {
-
-                // dispatch(increment())
-                return null;
-            },
-            errorElement: <ErrorPage />,
-        },
-        {
-
-            path: "/test",
-            element: <TestPage />,
-            errorElement: <ErrorPage />,
-        }
-    ]);
-
-    return <RouterProvider router={routes} />
-}
+    return (
+        <Routes>
+            <Route path={"/"} element={<Home />} />
+            {createRoutes()}
+            <Route path={"*"} element={<ErrorPage />} />
+        </Routes>
+    );
+};
 
 export default AppRouter;
