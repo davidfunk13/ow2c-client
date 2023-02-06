@@ -1,4 +1,3 @@
-import Battletag from "../../types/Battletag";
 import Session from "../../types/Session";
 import { api } from "./api";
 
