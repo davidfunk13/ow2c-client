@@ -26,9 +26,17 @@ export const sessionApi = api.injectEndpoints({
                 return [{ type: "Sessions", id: "LIST" }];
             }
         }),
+        createSession: build.mutation({
+            query: ({ battletagId, name }) => ({
+                url: `/battletag/${battletagId}/session`,
+                method: "POST",
+                body: { name }
+            }),
+            invalidatesTags: [{ type: "Sessions", id: "LIST" }]
+        }),
     })
 })
 
-export const { useGetSessionsQuery, } = sessionApi;
+export const { useGetSessionsQuery, useCreateSessionMutation } = sessionApi;
 
-export const { endpoints: { getSessions } } = sessionApi;
+export const { endpoints: { getSessions, createSession } } = sessionApi;
