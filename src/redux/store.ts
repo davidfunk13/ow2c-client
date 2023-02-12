@@ -4,12 +4,16 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { api } from './services/api'
 import battletagSlice from './slices/battletagSlice'
 import drawerSlice from './slices/drawerSlice'
+import modalSlice from './slices/modalSlice'
 import notificationsSlice from './slices/notificationsSlice'
+import sessionSlice from './slices/sessionSlice'
 
 export const store = configureStore({
   reducer: {
     battletag: battletagSlice,
     drawer: drawerSlice,
+    modal: modalSlice,
+    session: sessionSlice,
     notifications: notificationsSlice,
     [api.reducerPath]: api.reducer,
   },

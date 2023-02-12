@@ -12,6 +12,7 @@ import Ow2Icon from "../Ow2IconSVG";
 import { Box } from "@mui/system";
 import { selectDrawerOpen, setDrawerOpen } from "../../redux/slices/drawerSlice";
 import { Login } from "@mui/icons-material";
+import { resetSessionSlice, selectSession } from "../../redux/slices/sessionSlice";
 
 interface NavBarProps { }
 
@@ -20,6 +21,7 @@ const Navbar: FC<NavBarProps> = () => {
     const hideLogoBreakpoint = useMediaQuery(theme.breakpoints.up("sm"));
     const desktopMenuBreakpoint = useMediaQuery(theme.breakpoints.up("md"));
     const battletagName = useAppSelector(selectBattletagName);
+    const session = useAppSelector(selectSession);
     const showHamburger = !desktopMenuBreakpoint && battletagName;
     const [performLogout, result] = useLogoutMutation();
     const open = useAppSelector(selectDrawerOpen);
@@ -31,6 +33,7 @@ const Navbar: FC<NavBarProps> = () => {
 
     const logout = () => {
         dispatch(resetBattletagSlice());
+        dispatch(resetSessionSlice());
         performLogout(null);
     };
 
@@ -101,6 +104,11 @@ const Navbar: FC<NavBarProps> = () => {
                 {battletagName &&
                     <Typography px={1} mr={2} component={Paper}>
                         {battletagName}
+                    </Typography>
+                }
+                {session &&
+                    <Typography whiteSpace={"pre"} px={1} mr={2} component={Paper}>
+                        {session.name}
                     </Typography>
                 }
 

@@ -12,6 +12,8 @@ import DesktopNavigationMenu from './components/DesktopNavigationMenu/DesktopNav
 import { theme } from './theme/theme';
 import AppRouter from './AppRouter';
 import MobileNavigationMenu from './components/MobileNavigationMenu/MobileNavigationMenu';
+import Session from './types/Session';
+import { setSelectedSession } from './redux/slices/sessionSlice';
 
 interface AppProps { }
 
@@ -28,6 +30,10 @@ const App: FC<AppProps> = () => {
     const id = localStorage.getItem('id');
     const battletag = localStorage.getItem('battletag');
     const battletagId = localStorage.getItem('battletag_id');
+    const session = sessionStorage.getItem('session');
+    if (session) {
+      dispatch(setSelectedSession(JSON.parse(session)));
+    }
     if (battletag && battletagId && id) {
       dispatch(setBattletag({ battletag, id, battletag_id: +battletagId }));
     }

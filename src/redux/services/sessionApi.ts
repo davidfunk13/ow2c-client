@@ -33,9 +33,16 @@ export const sessionApi = api.injectEndpoints({
             }),
             invalidatesTags: [{ type: "Sessions", id: "LIST" }]
         }),
+        deleteSession: build.mutation({
+            query: ({battletagId, sessionId}) => ({
+                url: `/battletag/${battletagId}/session/${sessionId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Sessions'],
+        }),
     })
 })
 
-export const { useGetSessionsQuery, useCreateSessionMutation } = sessionApi;
+export const { useGetSessionsQuery, useCreateSessionMutation, useDeleteSessionMutation } = sessionApi;
 
-export const { endpoints: { getSessions, createSession } } = sessionApi;
+export const { endpoints: { getSessions, createSession, deleteSession } } = sessionApi;

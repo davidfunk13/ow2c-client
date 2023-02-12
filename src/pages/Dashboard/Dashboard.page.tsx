@@ -1,14 +1,15 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import { FC, SyntheticEvent, useEffect, useState } from "react";
+import { FC, SyntheticEvent } from "react";
 import ViewProvider from "../../providers/ViewProvider";
 import { useAppSelector } from "../../redux/hooks";
 import { useCreateSessionMutation, useGetSessionsQuery } from "../../redux/services/sessionApi";
 import { selectBattletagId } from "../../redux/slices/battletagSlice";
 import breadcrumbs from "./Dashboard.page.breadcrumbs";
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import Session from "../../types/Session";
 import { useFormik } from "formik";
 import validation from "../../utils/formValidations/addSessionFormValidation";
+import useStyles from "./Dashboard.styles";
+import submitFormWithPrevent from "../../utils/submitFormWithPrevent";
+import SessionTable from "../../components/SessionTable/SessionTable";
 
 interface DashboardPageProps { }
 
@@ -21,8 +22,8 @@ const DashboardPage: FC<DashboardPageProps> = () => {
     const battletagId = useAppSelector(selectBattletagId);
     const { data = [], isLoading } = useGetSessionsQuery({ id: battletagId }, { skip: !battletagId });
     const initialValues: SessionFormValues = { sessionName: "" };
-
-    const [createSession, result] = useCreateSessionMutation()
+    const [createSession] = useCreateSessionMutation()
+    const { classes } = useStyles();
 
     const formik = useFormik({
         initialValues,
@@ -36,36 +37,39 @@ const DashboardPage: FC<DashboardPageProps> = () => {
 
     const { values, handleChange, handleSubmit, errors } = formik;
 
-    const submitForm = (e: SyntheticEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
-        handleSubmit();
-    }
-
-    console.log(errors)
 
     return (
         <ViewProvider heading={"Dashboard"} breadcrumbs={breadcrumbs}>
-            <Grid container>
-                <Grid component={'form'} onSubmit={submitForm} item xs={12}>
-                    <Typography variant="h4">
-                        Add New Session
-                    </Typography>
-                    <TextField error={Boolean(errors.sessionName)} helperText={errors.sessionName} onChange={handleChange} name={"sessionName"} value={values.sessionName} label={"Session Name"} />
-                    <Button type={"submit"}>
-                        Submit
-                    </Button>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant="h4">
-                        Current Sessions
-                    </Typography>
-                    <DataGrid
-                        autoHeight
-                        loading={isLoading}
-                        columns={[{ field: "name", headerName: "Session Name", flex: 1 }]}
-                        rows={data}
-                    />
+            <Grid container spacing={2} >
+                <Grid container spacing={2} component={'form'} onSubmit={(e: SyntheticEvent) => submitFormWithPrevent(e, handleSubmit)} item xs={12}>
+                    <Grid item xs={12}>
+                        <Typography variant={"h4"}>
+                            Add New Session
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            error={Boolean(errors.sessionName)}
+                            helperText={errors.sessionName}
+                            onChange={handleChange}
+                            name={"sessionName"}
+                            value={values.sessionName}
+                            label={"Session Name"}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button variant={"contained"} type={"submit"}>
+                            Submit
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant={"h4"}>
+                            Current Sessions
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <SessionTable loading={isLoading} rows={data} />
+                    </Grid>
                 </Grid>
             </Grid>
         </ViewProvider>
