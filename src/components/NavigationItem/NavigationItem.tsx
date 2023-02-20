@@ -30,7 +30,7 @@ const NavigationItem: FC<INavigationItem> = ({ name, IconComponent, to, subItems
     }
 
     return (
-        <Box>
+        <>
             <ListItem component={ListItemButton} onClick={link}>
                 {IconComponent && <ListItemIcon><IconComponent /> </ListItemIcon>}
                 <ListItemText primary={name} />
@@ -40,6 +40,7 @@ const NavigationItem: FC<INavigationItem> = ({ name, IconComponent, to, subItems
                     </IconButton>
                 }
             </ListItem>
+            {console.log(subItems)}
             {subItems.length > 0 &&
                 <Collapse in={open} timeout={"auto"} unmountOnExit>
                     <List component={"div"} disablePadding>
@@ -60,8 +61,9 @@ const NavigationItem: FC<INavigationItem> = ({ name, IconComponent, to, subItems
                             );
                         })}
                     </List>
-                </Collapse>}
-        </Box>
+                </Collapse>
+            }
+        </>
 
     );
 };

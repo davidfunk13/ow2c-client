@@ -28,7 +28,7 @@ const SessionTable: FC<SessionTableProps> = ({ loading, rows }) => {
     const handleSelectSession = () => {
         dispatch(setSelectedSession(session))
         dispatch(resetModalItem())
-        setModalOpen(false)
+        setModalOpen(false);
     }
 
     return (

@@ -1,8 +1,7 @@
 import { FC, useEffect } from 'react'
 import { Box, Button, Grid, Toolbar, Typography, useMediaQuery } from '@mui/material';
-import authURI from './utils/authURI';
 import { useLogoutMutation, useTestQuery } from './redux/services/authApi';
-import { BrowserRouter, Outlet } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { resetBattletagSlice, selectBattletagName, setBattletag } from './redux/slices/battletagSlice';
 import { setSuccessSnackbar } from './redux/slices/notificationsSlice';
@@ -34,9 +33,11 @@ const App: FC<AppProps> = () => {
     if (session) {
       dispatch(setSelectedSession(JSON.parse(session)));
     }
+
     if (battletag && battletagId && id) {
-      dispatch(setBattletag({ battletag, id, battletag_id: +battletagId }));
+      dispatch(setBattletag({ battletag, id, blizz_id: +battletagId }));
     }
+
   }, [])
 
   return (

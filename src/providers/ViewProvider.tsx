@@ -13,7 +13,7 @@ import { selectBattletagName } from "../redux/slices/battletagSlice";
 
 interface ViewProviderProps {
     children: ReactNode
-    breadcrumbs?: Breadcrumb[]
+    breadcrumbs?: Breadcrumb[] | (()=>Breadcrumb[])
     heading: string
 }
 
