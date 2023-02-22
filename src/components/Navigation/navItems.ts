@@ -6,7 +6,11 @@ import SessionPage from "../../pages/Session/Session.page";
 import MenuItem from "../../types/MenuItem";
 
 export const sessionSubItems: Omit<MenuItem, "subItems">[] = [
-    { name: "Add Game", to: "session/:id/add-game", Page: AddGamePage, },
+    {
+        name: "Add Game",
+        to: "session/:id/add-game",
+        Page: AddGamePage,
+    },
 ];
 
 const navItems: MenuItem[] = [

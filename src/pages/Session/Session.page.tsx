@@ -14,7 +14,7 @@ const SessionPage: FC<SessionPageProps> = () => {
     const { classes } = useStyles();
 
     return (
-        <ViewProvider heading={"Session"} breadcrumbs={breadcrumbs}>
+        <ViewProvider heading={"Session"} breadcrumbs={breadcrumbs(session.id)}>
 
         </ViewProvider>
     );

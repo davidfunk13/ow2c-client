@@ -29,10 +29,7 @@ const DashboardPage: FC<DashboardPageProps> = () => {
         initialValues,
         validationSchema: validation,
         validateOnChange: false,
-        onSubmit: (values) => {
-            createSession({ battletagId, name: values.sessionName });
-            console.log(values)
-        }
+        onSubmit: (values) => createSession({ battletagId, name: values.sessionName })
     });
 
     const { values, handleChange, handleSubmit, errors } = formik;

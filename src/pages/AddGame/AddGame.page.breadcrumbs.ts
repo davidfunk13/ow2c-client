@@ -5,7 +5,7 @@ const breadcrumbs = (sessionId:string):Breadcrumb[] => [
     {
         name: "Session",
         bold: false,
-        linkPath: "/session"
+        linkPath: `/session/${sessionId}`
     },
     {
         name: "Add Game",

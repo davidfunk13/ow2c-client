@@ -1,9 +1,10 @@
 import Breadcrumb from '../../types/Breadcrumb';
 
-const breadcrumbs: Breadcrumb[] = [
+const breadcrumbs = (sessionId:string):Breadcrumb[] => [
     {
         name: "Session",
-        bold: true
+        bold: true,
+        linkPath: `/session/${sessionId}`
     },
 ];
 
