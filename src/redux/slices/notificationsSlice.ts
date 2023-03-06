@@ -1,11 +1,12 @@
+import { RootState } from "../store";
+import { createSlice } from "@reduxjs/toolkit";
+import { AlertColor } from "@mui/material";
+
 interface NotificationsState {
     message: string
     open: boolean
     variant: AlertColor
 }
-import { AlertColor } from "@mui/material";
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 
 export const initialState: NotificationsState = {
     open: false,

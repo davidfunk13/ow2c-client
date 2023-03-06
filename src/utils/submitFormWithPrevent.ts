@@ -6,4 +6,4 @@ const submitFormWithPrevent = (e: SyntheticEvent, handleSubmit: (e?: React.FormE
     handleSubmit();
 };
 
-export default submitFormWithPrevent
+export default submitFormWithPrevent;

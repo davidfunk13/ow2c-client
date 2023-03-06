@@ -2,7 +2,6 @@ import { Route } from "react-router-dom";
 import navItems from "../components/Navigation/navItems";
 import INavigationItem from "../types/MenuItem";
 
-
 const createRoutes = () => {
     let routes: Pick<INavigationItem, "to" | "Page">[] = [];
 

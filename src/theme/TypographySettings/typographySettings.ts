@@ -1,7 +1,4 @@
-const headingWeight = 400;
-
 const typographySettings = {
-    
     typography: {
         h1: {},
         h2: {},

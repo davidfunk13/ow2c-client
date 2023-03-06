@@ -1,12 +1,6 @@
 import Session from "../../types/Session";
 import { api } from "./api";
 
-interface SessionResponse { }
-
-interface ApiListResponse<T> {
-    data: T[]
-}
-
 export const sessionApi = api.injectEndpoints({
     endpoints: (build) => ({
         getSessions: build.query<Session[], { id: string }>({
@@ -36,12 +30,12 @@ export const sessionApi = api.injectEndpoints({
         deleteSession: build.mutation({
             query: ({battletagId, sessionId}) => ({
                 url: `/battletag/${battletagId}/session/${sessionId}`,
-                method: 'DELETE',
+                method: "DELETE",
             }),
-            invalidatesTags: ['Sessions'],
+            invalidatesTags: ["Sessions"],
         }),
     })
-})
+});
 
 export const { useGetSessionsQuery, useCreateSessionMutation, useDeleteSessionMutation } = sessionApi;
 

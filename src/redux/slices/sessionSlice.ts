@@ -1,18 +1,17 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../redux/store'
-import Battletag from '../../types/Battletag'
-import Session from '../../types/Session'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "../../redux/store";
+import Session from "../../types/Session";
 
 interface SessionState {
     session: Session
 }
 
 const initialState: SessionState = {
-    session: <Session>{}
-}
+    session: {} as Session
+};
 
 export const sessionSlice = createSlice({
-    name: 'session',
+    name: "session",
     initialState,
     reducers: {
         setSelectedSession: (state, action: PayloadAction<Session>) => {
@@ -24,10 +23,10 @@ export const sessionSlice = createSlice({
             state.session = initialState.session;
         }
     },
-})
+});
 
-export const { setSelectedSession, resetSessionSlice } = sessionSlice.actions
+export const { setSelectedSession, resetSessionSlice } = sessionSlice.actions;
 
 export const selectSession = (state: RootState) => state.session.session;
 
-export default sessionSlice.reducer
+export default sessionSlice.reducer;

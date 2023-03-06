@@ -9,17 +9,13 @@ export const authApi = api.injectEndpoints({
                 method: "POST",
             }),
         }),
-        test: build.query({
-            query: () => ({
-                url: `/test`,
-            }),
-        }),
+        test: build.query({query: () => ({url: "/test",}),}),
         logout: build.mutation({
             query() {
               return {
-                url: `/logout`,
-                method: 'GET',
-              }
+                url: "/logout",
+                method: "GET",
+              };
             },
         }),
     }),

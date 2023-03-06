@@ -13,8 +13,8 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     let result = await baseQuery(args, api, extraOptions);
 
     if(result.meta?.response?.status === 401) {
-        window.location.href = "/"
-        dispatch(setErrorSnackbar("Unauthorized: Something went wrong."))
+        window.location.href = "/";
+        dispatch(setErrorSnackbar("Unauthorized: Something went wrong."));
     }
 
     return result;

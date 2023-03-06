@@ -1,12 +1,10 @@
-import { CssBaseline, Grid } from '@mui/material'
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import App from './App'
-import AppRouter from './AppRouter'
-import Navbar from './components/Navbar/Navbar'
-import MuiThemeProvider from './providers/MuiThemeProvider/MuiThemeProvider'
-import { store } from './redux/store';
+import { CssBaseline } from "@mui/material";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import App from "./App";
+import MuiThemeProvider from "./providers/MuiThemeProvider/MuiThemeProvider";
+import { store } from "./redux/store";
 
 import createCache from "@emotion/cache";
 
@@ -27,4 +25,4 @@ ReactDOM.createRoot(container as HTMLElement).render(
       </Provider>
     </CacheProvider>
   </React.StrictMode>,
-)
+);

@@ -19,10 +19,11 @@ interface FavoriteProps {
 const Favorite: FC<FavoriteProps> = ({ contact }) => {
     // yes, this is a `let` for later
     let favorite = contact.favorite;
+    
     return (
-        <Form method="post">
+        <Form method={"post"}>
             <button
-                name="favorite"
+                name={"favorite"}
                 value={favorite ? "false" : "true"}
                 aria-label={
                     favorite
@@ -33,8 +34,8 @@ const Favorite: FC<FavoriteProps> = ({ contact }) => {
                 {favorite ? "★" : "☆"}
             </button>
         </Form>
-    )
-}
+    );
+};
 
 const ContactPage: FC<ContactPageProps> = () => {
     const contact = {
@@ -47,9 +48,10 @@ const ContactPage: FC<ContactPageProps> = () => {
     };
 
     return (
-        <div id="contact">
+        <div id={"contact"}>
             <div>
                 <img
+                    alt={"user-avatar"}
                     key={contact.avatar}
                     src={contact.avatar}
                 />
@@ -62,7 +64,7 @@ const ContactPage: FC<ContactPageProps> = () => {
                             {contact.first} {contact.last}
                         </>
                     ) : (
-                        <i>No Name</i>
+                        <i>{"No Name"}</i>
                     )}{" "}
                     <Favorite contact={contact} />
                 </h1>
@@ -70,8 +72,8 @@ const ContactPage: FC<ContactPageProps> = () => {
                 {contact.twitter && (
                     <p>
                         <a
-                            target="_blank"
-                            href={`https://twitter.com/${contact.twitter}`}
+                            target={"_blank"}
+                            href={`https://twitter.com/${contact.twitter}`} rel={"noreferrer"}
                         >
                             {contact.twitter}
                         </a>
@@ -81,12 +83,12 @@ const ContactPage: FC<ContactPageProps> = () => {
                 {contact.notes && <p>{contact.notes}</p>}
 
                 <div>
-                    <Form action="edit">
-                        <button type="submit">Edit</button>
+                    <Form action={"edit"}>
+                        <button type={"submit"}>{"Edit"}</button>
                     </Form>
                     <Form
-                        method="post"
-                        action="destroy"
+                        method={"post"}
+                        action={"destroy"}
                         onSubmit={(event) => {
                             if (
                                 !confirm(
@@ -97,13 +99,12 @@ const ContactPage: FC<ContactPageProps> = () => {
                             }
                         }}
                     >
-                        <button type="submit">Delete</button>
+                        <button type={"submit"}>{"Delete"}</button>
                     </Form>
                 </div>
             </div>
         </div>
     );
-}
-
+};
 
 export default ContactPage;

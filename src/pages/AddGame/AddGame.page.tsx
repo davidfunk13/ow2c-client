@@ -1,21 +1,32 @@
 import { Button, Grid } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect } from "react";
 import HorizontalStepper from "../../components/HorizontalStepper/HorizontalStepper";
+import { setHorizontalStepperStepBackward, setHorizontalStepperStepForward, setHorizontalStepperStepNames } from "../../components/HorizontalStepper/horizontalStepperSlice";
 import ViewProvider from "../../providers/ViewProvider";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectSession } from "../../redux/slices/sessionSlice";
 import breadcrumbs from "./AddGame.page.breadcrumbs";
-import useStyles from "./AddGame.styles";
 
 interface AddGamePageProps { }
 
 const AddGamePage: FC<AddGamePageProps> = () => {
     const session = useAppSelector(selectSession);
+    const dispatch = useAppDispatch();
     
-    const [step, setStep] = useState(0);
+    useEffect(() => {
+        const stepNames = ["Select Map", "Outcome"];
+        
+        dispatch(setHorizontalStepperStepNames(stepNames));
+        
+        return () => {
+            dispatch(setHorizontalStepperStepNames([]));
+        };
+        
+    }, [dispatch]);
 
-    const steps = ['Select Map',];
-    
+    const goFwd = () => dispatch(setHorizontalStepperStepForward());
+    const goBack = () => dispatch(setHorizontalStepperStepBackward());
+
     //going to support multiple rounds. 
     //keep wins/loss tally @ top of game object.
     //if hybrid/payload, keep track of checkpoints. 
@@ -25,18 +36,18 @@ const AddGamePage: FC<AddGamePageProps> = () => {
     // pick win/loss
     // repeat
     // victory?
-    
+
     return (
         <ViewProvider heading={"Add Game"} breadcrumbs={breadcrumbs(String(session.id))}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Button onClick={() => setStep((s) => s + 1)}>FWD</Button>
-                    <Button onClick={() => setStep((s) => s >= 1 ? s - 1 : s)}>BACK</Button>
-                    <HorizontalStepper stepNames={steps} step={step} />
+                    <Button onClick={() => goBack()}>{"BACK"}</Button>
+                    <Button onClick={() => goFwd()}>{"FWD"}</Button>
+                    <HorizontalStepper />
                 </Grid>
             </Grid>
         </ViewProvider>
     );
-}
+};
 
 export default AddGamePage;

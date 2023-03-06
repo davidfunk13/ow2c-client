@@ -38,7 +38,7 @@ const Modal: FC<ModalProps> = ({ title, children, open, onClose, stockSubmitButt
                 </Grid>
             </Box>
         </MuiModal>
-    )
-}
+    );
+};
 
 export default Modal;

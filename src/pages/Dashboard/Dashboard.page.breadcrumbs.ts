@@ -1,4 +1,4 @@
-import Breadcrumb from '../../types/Breadcrumb';
+import Breadcrumb from "../../types/Breadcrumb";
 
 const breadcrumbs: Breadcrumb[] = [
     {

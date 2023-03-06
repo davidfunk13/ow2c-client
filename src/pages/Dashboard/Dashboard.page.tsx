@@ -22,26 +22,28 @@ const DashboardPage: FC<DashboardPageProps> = () => {
     const battletagId = useAppSelector(selectBattletagId);
     const { data = [], isLoading } = useGetSessionsQuery({ id: battletagId }, { skip: !battletagId });
     const initialValues: SessionFormValues = { sessionName: "" };
-    const [createSession] = useCreateSessionMutation()
+    const [createSession] = useCreateSessionMutation();
     const { classes } = useStyles();
 
     const formik = useFormik({
         initialValues,
         validationSchema: validation,
         validateOnChange: false,
-        onSubmit: (values) => createSession({ battletagId, name: values.sessionName })
+        onSubmit: (values) => createSession({
+            battletagId,
+            name: values.sessionName
+        })
     });
 
     const { values, handleChange, handleSubmit, errors } = formik;
 
-
     return (
         <ViewProvider heading={"Dashboard"} breadcrumbs={breadcrumbs}>
             <Grid container spacing={2} >
-                <Grid container spacing={2} component={'form'} onSubmit={(e: SyntheticEvent) => submitFormWithPrevent(e, handleSubmit)} item xs={12}>
+                <Grid container spacing={2} component={"form"} onSubmit={(e: SyntheticEvent) => submitFormWithPrevent(e, handleSubmit)} item xs={12}>
                     <Grid item xs={12}>
                         <Typography variant={"h4"}>
-                            Add New Session
+                            {"Add New Session"}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
@@ -56,12 +58,12 @@ const DashboardPage: FC<DashboardPageProps> = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Button variant={"contained"} type={"submit"}>
-                            Submit
+                            {"Submit"}
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant={"h4"}>
-                            Current Sessions
+                            {"Current Sessions"}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
@@ -71,6 +73,6 @@ const DashboardPage: FC<DashboardPageProps> = () => {
             </Grid>
         </ViewProvider>
     );
-}
+};
 
 export default DashboardPage;
