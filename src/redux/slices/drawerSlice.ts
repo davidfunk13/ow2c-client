@@ -5,9 +5,7 @@ interface DrawerState {
     open: boolean
 }
 
-const initialState: DrawerState = {
-    open: false
-};
+const initialState: DrawerState = { open: false };
 
 export const drawerSlice = createSlice({
     name: "drawer",

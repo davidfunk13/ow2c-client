@@ -1,4 +1,4 @@
-import { Grid, Toolbar, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider";
 import breadcrumbs from "./Home.page.breadcrumbs";
@@ -9,8 +9,8 @@ const HomePage: FC<HomePageProps> = () => {
     return (
 
         <ViewProvider heading={"Home"} breadcrumbs={breadcrumbs}>
-             <Typography>Yo</Typography>
-         </ViewProvider>
+            <Typography>{"Yo"}</Typography>
+        </ViewProvider>
     );
-}
+};
 export default HomePage;

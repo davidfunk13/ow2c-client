@@ -6,9 +6,7 @@ interface SessionState {
     session: Session
 }
 
-const initialState: SessionState = {
-    session: {} as Session
-};
+const initialState: SessionState = { session: {} as Session };
 
 export const sessionSlice = createSlice({
     name: "session",

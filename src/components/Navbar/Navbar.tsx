@@ -1,17 +1,15 @@
 import { AppBar, Button, IconButton, Paper, Toolbar, Typography, useMediaQuery } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { resetBattletagSlice, selectBattletagName } from "../../redux/slices/battletagSlice";
 import { theme } from "../../theme/theme";
 import useStyles from "./Navbar.styles";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import authURI from "../../utils/authURI";
 import { useLogoutMutation } from "../../redux/services/authApi";
 import { setSuccessSnackbar } from "../../redux/slices/notificationsSlice";
 import Ow2Icon from "../Ow2IconSVG";
-import { Box } from "@mui/system";
 import { selectDrawerOpen, setDrawerOpen } from "../../redux/slices/drawerSlice";
-import { Login } from "@mui/icons-material";
 import { resetSessionSlice, selectSession } from "../../redux/slices/sessionSlice";
 
 interface NavBarProps { }
@@ -67,7 +65,6 @@ const Navbar: FC<NavBarProps> = () => {
         </Button>;
     };
 
-
     return (
         <AppBar className={cx({ [classes.appBar]: desktopMenuBreakpoint })} >
             <Toolbar>
@@ -99,7 +96,6 @@ const Navbar: FC<NavBarProps> = () => {
                     {"Overwatch Companion"}
                 </Typography>
 
-
                 {/* Battletag */}
                 {battletagName &&
                     <Typography px={1} mr={2} component={Paper}>
@@ -118,6 +114,6 @@ const Navbar: FC<NavBarProps> = () => {
             </Toolbar>
         </AppBar>
     );
-}
+};
 
 export default Navbar;

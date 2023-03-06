@@ -37,7 +37,6 @@ const NavigationItem: FC<INavigationItem> = ({ name, children, IconComponent, to
         }
     }
 
-
     return (
         <>
             <ListItem component={ListItemButton} onClick={link}>

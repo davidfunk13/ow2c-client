@@ -23,7 +23,6 @@ const DashboardPage: FC<DashboardPageProps> = () => {
     const { data = [], isLoading } = useGetSessionsQuery({ id: battletagId }, { skip: !battletagId });
     const initialValues: SessionFormValues = { sessionName: "" };
     const [createSession] = useCreateSessionMutation();
-    const { classes } = useStyles();
 
     const formik = useFormik({
         initialValues,

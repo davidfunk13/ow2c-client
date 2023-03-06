@@ -12,16 +12,16 @@ interface AddGamePageProps { }
 const AddGamePage: FC<AddGamePageProps> = () => {
     const session = useAppSelector(selectSession);
     const dispatch = useAppDispatch();
-    
+
     useEffect(() => {
         const stepNames = ["Select Map", "Outcome"];
-        
+
         dispatch(setHorizontalStepperStepNames(stepNames));
-        
+
         return () => {
             dispatch(setHorizontalStepperStepNames([]));
         };
-        
+
     }, [dispatch]);
 
     const goFwd = () => dispatch(setHorizontalStepperStepForward());

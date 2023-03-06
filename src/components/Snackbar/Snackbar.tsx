@@ -23,7 +23,10 @@ const Snackbar: FC<IAppSnackbar> = () => {
             data-testid={"snackbar"}
             open={snackbarOpen}
             autoHideDuration={2000}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center"
+            }}
             onClose={handleCloseSnackbar}
         >
             <Alert data-testid={"snackbar-message"} severity={snackbarVariant} onClose={handleCloseSnackbar}>

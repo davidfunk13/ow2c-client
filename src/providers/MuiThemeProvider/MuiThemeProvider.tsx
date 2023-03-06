@@ -7,7 +7,8 @@ interface MuiThemeProviderProps {
 }
 
 const MuiThemeProvider: FC<MuiThemeProviderProps> = ({ children }) => {
-    const [dark, setDark] = useState(false);
+    const [dark] = useState(false);
+
     return (
         <ThemeProvider theme={selectedTheme(dark)}>
             {children}

@@ -1,9 +1,9 @@
-import { StarBorder } from '@mui/icons-material';
-import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import React, { Dispatch, FC, SetStateAction } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/hooks';
-import { setDrawerOpen } from '../../redux/slices/drawerSlice';
+import { StarBorder } from "@mui/icons-material";
+import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import React, { Dispatch, FC, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { setDrawerOpen } from "../../redux/slices/drawerSlice";
 
 interface NavigationSubItemProps {
     to: string
@@ -17,9 +17,9 @@ const NavigationSubItem: FC<NavigationSubItemProps> = ({ text, to, setParentOpen
 
     const link = () => {
         if (setParentOpen) {
-            setParentOpen(false)
+            setParentOpen(false);
         }
-        
+
         dispatch(setDrawerOpen(false));
         to && navigate(to);
     };
@@ -31,7 +31,7 @@ const NavigationSubItem: FC<NavigationSubItemProps> = ({ text, to, setParentOpen
             </ListItemIcon>
             <ListItemText primary={text} />
         </ListItemButton>
-    )
+    );
 };
 
 export default NavigationSubItem;

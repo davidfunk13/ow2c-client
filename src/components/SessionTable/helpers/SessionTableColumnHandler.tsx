@@ -14,10 +14,13 @@ const SessionTableColumnHandler = ({ setModalOpen, battletagId }: SessionTableCo
         flex: 1,
     },
     {
-        field: "actions", headerName: "Actions", flex: 1, renderCell: ({ row }: GridRenderCellParams) => {
+        field: "actions",
+        headerName: "Actions",
+        flex: 1,
+        renderCell: ({ row }: GridRenderCellParams) => {
             return (
                 <SessionTableActionButtons battletagId={battletagId} row={row} setModalOpen={setModalOpen} />
-            )
+            );
         }
     }
 ];

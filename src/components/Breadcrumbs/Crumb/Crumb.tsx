@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 import Breadcrumb from "../../../types/Breadcrumb";
 import useStyles from "./Crumb.styles";
 
-interface Crumb {
+interface CrumbProps {
     breadcrumb: Breadcrumb
 }
 
-const Crumb: FC<Crumb> = ({ breadcrumb }) => {
+const Crumb: FC<CrumbProps> = ({ breadcrumb }) => {
     const { name, linkPath, bold } = breadcrumb;
 
     const { classes } = useStyles({ isBold: bold! });

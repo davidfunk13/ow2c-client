@@ -10,9 +10,7 @@ const useStyles = makeStyles({ name: "ViewProvider Styles" })((theme) => ({
         flexGrow: 1,
         marginLeft: theme.spacing(30),
     },
-    breadcrumbPadding: {
-        paddingLeft: theme.spacing(2)
-    }
+    breadcrumbPadding: { paddingLeft: theme.spacing(2) }
 }));
 
 export default useStyles;

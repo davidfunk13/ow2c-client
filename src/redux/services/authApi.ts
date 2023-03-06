@@ -9,18 +9,18 @@ export const authApi = api.injectEndpoints({
                 method: "POST",
             }),
         }),
-        test: build.query({query: () => ({url: "/test",}),}),
+        test: build.query({ query: () => ({ url: "/test", }), }),
         logout: build.mutation({
             query() {
-              return {
-                url: "/logout",
-                method: "GET",
-              };
+                return {
+                    url: "/logout",
+                    method: "GET",
+                };
             },
         }),
     }),
 });
 
-export const { useGetLoginQuery, useTestQuery, useLogoutMutation,  } = authApi;
+export const { useGetLoginQuery, useTestQuery, useLogoutMutation, } = authApi;
 
 export const { endpoints: { getLogin } } = authApi;

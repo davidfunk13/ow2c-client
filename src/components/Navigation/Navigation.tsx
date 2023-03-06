@@ -1,11 +1,10 @@
-import { Button, List } from "@mui/material";
+import { List } from "@mui/material";
 import { FC, useState } from "react";
 import NavigationItem from "../NavigationItem/NavigationItem";
 import { Home as HomeIcon } from "@mui/icons-material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useAppSelector } from "../../redux/hooks";
 import { selectSession } from "../../redux/slices/sessionSlice";
-import { sessionSubItems } from "./navItems";
 import NavigationSubItem from "../NavigationSubItem/NavigationSubItem";
 
 interface INavigation { }

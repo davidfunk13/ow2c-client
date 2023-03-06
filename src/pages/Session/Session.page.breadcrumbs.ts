@@ -1,6 +1,6 @@
-import Breadcrumb from '../../types/Breadcrumb';
+import Breadcrumb from "../../types/Breadcrumb";
 
-const breadcrumbs = (sessionId:string):Breadcrumb[] => [
+const breadcrumbs = (sessionId: string): Breadcrumb[] => [
     {
         name: "Session",
         bold: true,

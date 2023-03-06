@@ -7,9 +7,7 @@ interface ModalState {
     item: Session | Battletag
 }
 
-const initialState: ModalState = {
-    item: {} as Session | Battletag
-};
+const initialState: ModalState = { item: {} as Session | Battletag };
 
 export const modalSlice = createSlice({
     name: "modal",
