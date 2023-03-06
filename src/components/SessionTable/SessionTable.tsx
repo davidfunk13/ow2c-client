@@ -1,14 +1,12 @@
-import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { FC, useState } from "react";
+import { Box, Button, Dialog, DialogContent, Grid, Typography } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectBattletagId } from "../../redux/slices/battletagSlice";
 import Session from "../../types/Session";
 import sessionTableColumnHandler from "./helpers/SessionTableColumnHandler";
 import Modal from "../Modal/Modal";
-import StockModalButtons from "../Modal/StockModalButtons/StockModalButtons";
-import { selectSession, setSelectedSession } from "../../redux/slices/sessionSlice";
-import { resetModalItem, selectModalItem } from "../../redux/slices/modalSlice";
+import { setSelectedSession } from "../../redux/slices/sessionSlice";
+import { initialState, selectModalItem, selectModalOpen, setModalItem, setModalOpen } from "../Modal/modalSlice";
 
 interface SessionTableProps {
     loading: boolean
@@ -16,35 +14,50 @@ interface SessionTableProps {
 }
 
 const SessionTable: FC<SessionTableProps> = ({ loading, rows }) => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const battletagId = useAppSelector(selectBattletagId);
     const session = useAppSelector(selectModalItem) as Session;
     const dispatch = useAppDispatch();
+    const modalOpen = useAppSelector(selectModalOpen);
 
     const handleCloseModal = () => {
-        setModalOpen(false);
+        dispatch(setModalOpen(false));
     };
 
     const handleSelectSession = () => {
         dispatch(setSelectedSession(session));
-        dispatch(resetModalItem());
-        setModalOpen(false);
+        dispatch(setModalItem(initialState.item));
+        dispatch(setModalOpen(false));
     };
 
-    const renderColumns = sessionTableColumnHandler({
-        setModalOpen,
-        battletagId
-    });
+    const renderColumns = sessionTableColumnHandler();
+
+    const ModalButtons = (): JSX.Element => {
+        return (
+            <Grid container spacing={2} justifyContent={"flex-end"}>
+                <Grid item xs={4}>
+                    <Button fullWidth variant={"contained"} onClick={handleSelectSession}>
+                        {"Submit"}
+                    </Button>
+
+                </Grid>
+                <Grid item xs={4}>
+                    <Button fullWidth variant={"contained"} color={"error"} onClick={handleCloseModal}>
+                        {"Cancel"}
+                    </Button>
+                </Grid>
+            </Grid>
+        );
+    };
 
     return (
         <Box>
             <DataGrid
+                disableSelectionOnClick
                 autoHeight
                 loading={loading}
                 columns={renderColumns}
                 rows={rows}
             />
-            <Modal title={"Session"} open={modalOpen} onClose={() => setModalOpen(false)}>
+            <Modal modalButtons={ModalButtons} title={"Session"} open={modalOpen}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography variant={"body1"}>
@@ -52,25 +65,13 @@ const SessionTable: FC<SessionTableProps> = ({ loading, rows }) => {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography fontStyle={"italic"} variant={"caption"}>
+                        <Typography>
                             {"When a session is selected, you may begin adding or editing games in this session."}
                         </Typography>
                     </Grid>
-                    <Grid container justifyContent={"flex-end"} spacing={2} item xs={12}>
-                        <Grid item xs={3}>
-                            <Button variant={"text"} onClick={handleSelectSession}>
-                                {"Submit"}
-                            </Button>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Button variant={"text"} color={"error"} onClick={handleCloseModal}>
-                                {"Cancel"}
-                            </Button>
-                        </Grid>
-                    </Grid>
                 </Grid>
             </Modal>
-        </Box>
+        </Box >
     );
 };
 

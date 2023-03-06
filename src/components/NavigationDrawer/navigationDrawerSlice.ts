@@ -7,8 +7,8 @@ interface DrawerState {
 
 const initialState: DrawerState = { open: false };
 
-export const drawerSlice = createSlice({
-    name: "drawer",
+export const navigationDrawerSlice = createSlice({
+    name: "navigationDrawer",
     initialState,
     reducers: {
         setDrawerOpen: (state, action: PayloadAction<boolean>) => {
@@ -17,8 +17,8 @@ export const drawerSlice = createSlice({
     },
 });
 
-export const { setDrawerOpen } = drawerSlice.actions;
+export const { setDrawerOpen } = navigationDrawerSlice.actions;
 
-export const selectDrawerOpen = (state: RootState) => state.drawer.open;
+export const selectDrawerOpen = (state: RootState) => state.navigationDrawer.open;
 
-export default drawerSlice.reducer;
+export default navigationDrawerSlice.reducer;

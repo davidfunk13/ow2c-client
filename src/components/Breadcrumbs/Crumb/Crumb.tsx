@@ -1,6 +1,5 @@
-import { Typography } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { FC } from "react";
-import { NavLink } from "react-router-dom";
 import Breadcrumb from "../../../types/Breadcrumb";
 import useStyles from "./Crumb.styles";
 
@@ -16,14 +15,9 @@ const Crumb: FC<CrumbProps> = ({ breadcrumb }) => {
     const to = linkPath ?? "";
 
     return (
-        <Typography
-            className={classes.makeBold}
-            aria-label={`${name}-breadcrumb-text`}
-            component={NavLink}
-            to={to}
-        >
+        <Button className={classes.makeBold} LinkComponent={Link} href={to}>
             {name}
-        </Typography>
+        </Button>
     );
 };
 

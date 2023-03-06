@@ -1,26 +1,22 @@
 import { Button, Grid } from "@mui/material";
 import { FC } from "react";
+import { useAppDispatch } from "../../../redux/hooks";
+import { resetModal } from "../modalSlice";
 
-interface StockModalButtonsProps {
-    closeAction: () => void
-}
+interface StockModalButtonsProps { }
 
-const StockModalButtons: FC<StockModalButtonsProps> = ({ closeAction }) => {
-
-    const test = {
-        item: "",
-        test: ""
-    };
+const StockModalButtons: FC<StockModalButtonsProps> = () => {
+    const dispatch = useAppDispatch();
 
     return (
-        <Grid container justifyContent={"flex-end"}>
-            <Grid item xs={3}>
-                <Button variant={"text"} type={"submit"}>
+        <Grid container spacing={2} justifyContent={"flex-end"}>
+            <Grid item xs={4}>
+                <Button fullWidth variant={"contained"} type={"submit"}>
                     {"Submit"}
                 </Button>
             </Grid>
-            <Grid item xs={3}>
-                <Button variant={"text"} color={"error"} onClick={() => closeAction()}>
+            <Grid item xs={4}>
+                <Button fullWidth variant={"contained"} color={"error"} onClick={() => dispatch(resetModal())}>
                     {"Cancel"}
                 </Button>
             </Grid>

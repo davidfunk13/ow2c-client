@@ -1,16 +1,30 @@
-import { FC, ReactNode, useState } from "react";
+import { darkTheme, lightTheme } from "../../theme/theme";
+import { FC, ReactNode } from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import selectedTheme from "../../utils/selectedTheme";
+import { useAppSelector } from "../../redux/hooks";
+import { selectTheme } from "../../redux/slices/themeSlice";
+import { AvailableThemes } from "../../types/AvailableThemes";
 
 interface MuiThemeProviderProps {
     children: ReactNode
 }
 
+export const parseTheme = (theme: AvailableThemes) => {
+    switch (theme) {
+        case "light":
+            return lightTheme;
+        case "dark":
+            return darkTheme;
+        default:
+            return lightTheme;
+    }
+};
+
 const MuiThemeProvider: FC<MuiThemeProviderProps> = ({ children }) => {
-    const [dark] = useState(false);
+    const theme = useAppSelector(selectTheme);
 
     return (
-        <ThemeProvider theme={selectedTheme(dark)}>
+        <ThemeProvider theme={parseTheme(theme)}>
             {children}
         </ThemeProvider>
     );

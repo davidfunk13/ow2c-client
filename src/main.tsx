@@ -10,7 +10,10 @@ import createCache from "@emotion/cache";
 
 import { CacheProvider } from "@emotion/react";
 
-export const muiCache = createCache({ key: "mui", prepend: true });
+export const muiCache = createCache({
+  key: "mui",
+  prepend: true
+});
 
 const container = document.getElementById("root");
 

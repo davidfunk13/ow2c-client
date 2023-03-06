@@ -1,25 +1,25 @@
 import { Delete, FileOpen } from "@mui/icons-material";
 import { Grid, IconButton } from "@mui/material";
-import { Dispatch, FC, SetStateAction } from "react";
-import { useAppDispatch } from "../../../redux/hooks";
+import { FC } from "react";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useDeleteSessionMutation } from "../../../redux/services/sessionApi";
-import { setModalItem } from "../../../redux/slices/modalSlice";
+import { setModalItem, setModalOpen } from "../../Modal/modalSlice";
 import Session from "../../../types/Session";
+import { selectBattletagId } from "../../../redux/slices/battletagSlice";
 
 interface SessionTableActionButtonsProps {
-    setModalOpen: Dispatch<SetStateAction<boolean>>,
-    battletagId: string
     row: Session
 }
 
-const SessionTableActionButtons: FC<SessionTableActionButtonsProps> = ({ setModalOpen, battletagId, row }) => {
-
+const SessionTableActionButtons: FC<SessionTableActionButtonsProps> = ({ row }) => {
     const [deleteSession] = useDeleteSessionMutation();
+    const battletagId = useAppSelector(selectBattletagId);
+
     const dispatch = useAppDispatch();
 
     const handleSelectSession = () => {
         dispatch(setModalItem(row));
-        setModalOpen(true);
+        dispatch(setModalOpen(true));
     };
 
     return (

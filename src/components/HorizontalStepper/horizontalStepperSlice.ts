@@ -16,12 +16,12 @@ export const horizonalStepperSlice = createSlice({
     initialState,
     reducers: {
         setHorizontalStepperStepForward: (state) => {
-            if (state.step < state.stepNames.length - 1){
+            if (state.step < state.stepNames.length - 1) {
                 state.step = state.step + 1;
-            }            
+            }
         },
         setHorizontalStepperStepBackward: (state) => {
-            if(state.step >=1 ){
+            if (state.step >= 1) {
                 state.step = state.step - 1;
             }
         },
@@ -29,7 +29,8 @@ export const horizonalStepperSlice = createSlice({
             state.stepNames = action.payload;
         },
         resetHorizontalStepperSlice: (state) => {
-            state = initialState;
+            state.stepNames = initialState.stepNames;
+            state.step = initialState.step;
         }
     },
 });

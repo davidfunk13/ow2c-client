@@ -32,7 +32,9 @@
         ],
         "object-curly-newline": [
             "error",
-            {"multiline":true}
+            {
+                "multiline": true
+            }
         ],
         "object-property-newline": "error"
     }

@@ -1,13 +1,7 @@
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { Dispatch, SetStateAction } from "react";
 import SessionTableActionButtons from "./SessionTableActionButtons";
 
-interface SessionTableColumnHandlerArgs {
-    setModalOpen: Dispatch<SetStateAction<boolean>>
-    battletagId: string
-}
-
-const SessionTableColumnHandler = ({ setModalOpen, battletagId }: SessionTableColumnHandlerArgs): GridColDef[] => [
+const SessionTableColumnHandler = (): GridColDef[] => [
     {
         field: "name",
         headerName: "Session Name",
@@ -19,7 +13,7 @@ const SessionTableColumnHandler = ({ setModalOpen, battletagId }: SessionTableCo
         flex: 1,
         renderCell: ({ row }: GridRenderCellParams) => {
             return (
-                <SessionTableActionButtons battletagId={battletagId} row={row} setModalOpen={setModalOpen} />
+                <SessionTableActionButtons row={row} />
             );
         }
     }

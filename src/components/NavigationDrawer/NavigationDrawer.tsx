@@ -2,12 +2,12 @@ import { Divider, Drawer, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectDrawerOpen, setDrawerOpen } from "../../redux/slices/drawerSlice";
+import { selectDrawerOpen, setDrawerOpen } from "./navigationDrawerSlice";
 import Navigation from "../Navigation/Navigation";
 
-interface MobileNavigationMenuProps { }
+interface NavigationDrawerProps { }
 
-const MobileNavigationMenu: FC<MobileNavigationMenuProps> = () => {
+const NavigationDrawer: FC<NavigationDrawerProps> = () => {
     const drawerOpen = useAppSelector(selectDrawerOpen);
     const dispatch = useAppDispatch();
     const handleDrawerToggle = () => dispatch(setDrawerOpen(!drawerOpen));
@@ -37,4 +37,4 @@ const MobileNavigationMenu: FC<MobileNavigationMenuProps> = () => {
     );
 };
 
-export default MobileNavigationMenu;
+export default NavigationDrawer;

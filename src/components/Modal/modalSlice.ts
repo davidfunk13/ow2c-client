@@ -1,13 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../redux/store";
+import AppItems from "../../types/AppItems";
 import Battletag from "../../types/Battletag";
 import Session from "../../types/Session";
 
 interface ModalState {
-    item: Session | Battletag
+    open: boolean
+    item: AppItems
 }
 
-const initialState: ModalState = { item: {} as Session | Battletag };
+export const initialState: ModalState = {
+    open: false,
+    item: {} as AppItems
+};
 
 export const modalSlice = createSlice({
     name: "modal",
@@ -16,14 +21,19 @@ export const modalSlice = createSlice({
         setModalItem: (state, action: PayloadAction<Session | Battletag>) => {
             state.item = action.payload;
         },
-        resetModalItem: (state) => {
+        setModalOpen: (state, action: PayloadAction<boolean>) => {
+            state.open = action.payload;
+        },
+        resetModal: (state) => {
             state.item = initialState.item;
+            state.open = initialState.open;
         }
     },
 });
 
-export const { setModalItem, resetModalItem } = modalSlice.actions;
+export const { setModalOpen, setModalItem, resetModal } = modalSlice.actions;
 
 export const selectModalItem = (state: RootState) => state.modal.item;
+export const selectModalOpen = (state: RootState) => state.modal.open;
 
 export default modalSlice.reducer;

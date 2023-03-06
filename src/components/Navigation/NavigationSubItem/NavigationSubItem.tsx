@@ -2,8 +2,8 @@ import { StarBorder } from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
-import { setDrawerOpen } from "../../redux/slices/drawerSlice";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setDrawerOpen } from "../../NavigationDrawer/navigationDrawerSlice";
 
 interface NavigationSubItemProps {
     to: string

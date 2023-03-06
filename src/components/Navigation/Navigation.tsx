@@ -1,11 +1,11 @@
 import { List } from "@mui/material";
 import { FC, useState } from "react";
-import NavigationItem from "../NavigationItem/NavigationItem";
 import { Home as HomeIcon } from "@mui/icons-material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useAppSelector } from "../../redux/hooks";
 import { selectSession } from "../../redux/slices/sessionSlice";
-import NavigationSubItem from "../NavigationSubItem/NavigationSubItem";
+import NavigationItem from "./NavigationItem/NavigationItem";
+import NavigationSubItem from "./NavigationSubItem/NavigationSubItem";
 
 interface INavigation { }
 
@@ -29,7 +29,6 @@ const Navigation: FC<INavigation> = () => {
                 name={"Dashboard"}
                 IconComponent={DashboardIcon}
             />
-
             {session &&
                 <NavigationItem
                     open={sessionNavOpen}

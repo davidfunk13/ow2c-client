@@ -1,11 +1,10 @@
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
-import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { match } from "assert";
-import { Dispatch, FC, ReactElement, ReactNode, SetStateAction, SyntheticEvent, useState } from "react";
+import { Collapse, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { Dispatch, FC, ReactElement, SetStateAction, SyntheticEvent, } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
-import { setDrawerOpen } from "../../redux/slices/drawerSlice";
-import MenuItem from "../../types/MenuItem";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setDrawerOpen } from "../../NavigationDrawer/navigationDrawerSlice";
+import MenuItem from "../../../types/MenuItem";
 
 interface INavigationItem {
     name: MenuItem["name"],

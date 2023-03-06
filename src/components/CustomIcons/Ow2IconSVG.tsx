@@ -1,4 +1,4 @@
-import { FC, SVGAttributes } from "react";
+import { FC } from "react";
 
 const Ow2IconSVG: FC<{ className: string }> = ({ className }) => {
     return (

@@ -8,8 +8,9 @@ import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
 import Snackbar from "../components/Snackbar/Snackbar";
 import { useAppSelector } from "../redux/hooks";
 import Breadcrumb from "../types/Breadcrumb";
-import { theme } from "../theme/theme";
 import { selectBattletagName } from "../redux/slices/battletagSlice";
+import { selectTheme } from "../redux/slices/themeSlice";
+import { parseTheme } from "./MuiThemeProvider/MuiThemeProvider";
 
 interface ViewProviderProps {
     children: ReactNode
@@ -19,9 +20,12 @@ interface ViewProviderProps {
 
 const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs = [] }: ViewProviderProps) => {
     const location = useLocation();
-    const desktopBreakpoint = useMediaQuery(theme.breakpoints.up("md"));
+    const theme = useAppSelector(selectTheme);
+    const currentTheme = parseTheme(theme);
+    const desktopBreakpoint = useMediaQuery(currentTheme.breakpoints.up("md"));
     const { classes } = useStyles();
     const battletagName = useAppSelector(selectBattletagName);
+
     return (
         <Box component={"main"} className={clsx(desktopBreakpoint && battletagName ? classes.desktopContainer : classes.mobileContainer)}>
             {/* padding on view that nudges content below navbar. */}
