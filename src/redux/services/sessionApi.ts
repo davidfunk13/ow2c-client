@@ -4,19 +4,26 @@ import { api } from "./api";
 export const sessionApi = api.injectEndpoints({
     endpoints: (build) => ({
         getSessions: build.query<Session[], { id: string }>({
-            query: ({ id }) => ({
-                url: `/battletag/${id}/session`,
-            }),
+            query: ({ id }) => ({ url: `/battletag/${id}/session`, }),
             transformResponse: (response: { data: Session[] }, meta, arg) => response.data,
             providesTags: (result) => {
                 if (result && result && result.length) {
                     return [
-                        ...result.map(({ id }: { id: string }) => ({ type: "Sessions", id } as const)),
-                        { type: "Sessions", id: "LIST" },
+                        ...result.map(({ id }: { id: string }) => ({
+                            type: "Sessions",
+                            id
+                        } as const)),
+                        {
+                            type: "Sessions",
+                            id: "LIST"
+                        },
                     ];
                 }
 
-                return [{ type: "Sessions", id: "LIST" }];
+                return [{
+                    type: "Sessions",
+                    id: "LIST"
+                }];
             }
         }),
         createSession: build.mutation({
@@ -25,10 +32,13 @@ export const sessionApi = api.injectEndpoints({
                 method: "POST",
                 body: { name }
             }),
-            invalidatesTags: [{ type: "Sessions", id: "LIST" }]
+            invalidatesTags: [{
+                type: "Sessions",
+                id: "LIST"
+            }]
         }),
         deleteSession: build.mutation({
-            query: ({battletagId, sessionId}) => ({
+            query: ({ battletagId, sessionId }) => ({
                 url: `/battletag/${battletagId}/session/${sessionId}`,
                 method: "DELETE",
             }),

@@ -1,4 +1,4 @@
-import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { Dispatch, FC, ReactElement, SetStateAction, SyntheticEvent, } from "react";
 import { useNavigate } from "react-router-dom";
