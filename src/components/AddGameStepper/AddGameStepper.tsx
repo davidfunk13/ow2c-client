@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import HorizontalStepper from "../HorizontalStepper/HorizontalStepper";
 import { selectHorizontalStepperStep, selectHorizontalStepperStepNames, setHorizontalStepperStepNames } from "../HorizontalStepper/horizontalStepperSlice";
 import GameOutcome from "./steps/GameOutcome/GameOutcome";
-import SelectMapPlayed from "./steps/SelectMapPlayed/SelectMapPlayed";
+import SelectLocationPlayed from "./steps/SelectLocationPlayed/SelectLocationPlayed";
 
 interface AddGameStepperProps {
 
@@ -12,8 +12,8 @@ interface AddGameStepperProps {
 
 const renderStep = (stepName: string) => {
     switch (stepName) {
-        case "Select Map":
-            return <SelectMapPlayed />;
+        case "Select Location":
+            return <SelectLocationPlayed />;
         case "Outcome":
             return <GameOutcome />;
 
@@ -29,7 +29,7 @@ const AddGameStepper: FC<AddGameStepperProps> = () => {
     const current = stepNames[step];
 
     useEffect(() => {
-        const stepNames = ["Select Map", "Outcome"];
+        const stepNames = ["Select Location", "Outcome"];
 
         dispatch(setHorizontalStepperStepNames(stepNames));
 
