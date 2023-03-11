@@ -1,5 +1,6 @@
 import { Button, Grid } from "@mui/material";
 import { FC, useEffect } from "react";
+import AddGameStepper from "../../components/AddGameStepper/AddGameStepper";
 import HorizontalStepper from "../../components/HorizontalStepper/HorizontalStepper";
 import { setHorizontalStepperStepBackward, setHorizontalStepperStepForward, setHorizontalStepperStepNames } from "../../components/HorizontalStepper/horizontalStepperSlice";
 import ViewProvider from "../../providers/ViewProvider";
@@ -12,17 +13,6 @@ interface AddGamePageProps { }
 const AddGamePage: FC<AddGamePageProps> = () => {
     const session = useAppSelector(selectSession);
     const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        const stepNames = ["Select Map", "Outcome"];
-
-        dispatch(setHorizontalStepperStepNames(stepNames));
-
-        return () => {
-            dispatch(setHorizontalStepperStepNames([]));
-        };
-
-    }, [dispatch]);
 
     const goFwd = () => dispatch(setHorizontalStepperStepForward());
     const goBack = () => dispatch(setHorizontalStepperStepBackward());
@@ -43,7 +33,7 @@ const AddGamePage: FC<AddGamePageProps> = () => {
                 <Grid item xs={12}>
                     <Button onClick={() => goBack()}>{"BACK"}</Button>
                     <Button onClick={() => goFwd()}>{"FWD"}</Button>
-                    <HorizontalStepper />
+                    <AddGameStepper />
                 </Grid>
             </Grid>
         </ViewProvider>
