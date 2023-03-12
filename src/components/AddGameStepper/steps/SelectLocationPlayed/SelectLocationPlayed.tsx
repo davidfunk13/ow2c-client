@@ -1,6 +1,6 @@
-import { Grid, Typography } from "@mui/material";
+import { Autocomplete, Grid, TextField, Typography } from "@mui/material";
 import { FC } from "react";
-import { controlLocations, escortLocations, hybridLocations, pushLocations } from "../../../../utils/Locations";
+import locations, { controlLocations, escortLocations, hybridLocations, pushLocations } from "../../../../utils/Locations";
 import LocationCard from "../../../MapCard/MapCard";
 
 interface SelectLocationPlayedProps {
@@ -10,6 +10,14 @@ interface SelectLocationPlayedProps {
 const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
     return (
         <Grid container spacing={2}>
+            <Grid item xs={4}>
+                <Autocomplete
+                    options={locations}
+                    getOptionLabel={(option) => option.name}
+                    id={"select-location-input"} sss
+                    renderInput={(params) => <TextField {...params} label={"Select Location"} />}
+                />
+            </Grid>
             <Grid item xs={12}>
                 <Typography variant={"h1"}>
                     {"Select Location"}
