@@ -5,12 +5,13 @@ import useStyles from "./MapCard.styles";
 
 interface LocationCardProps {
     location: Location
+    onClick: () => void
 }
 
-const LocationCard: FC<LocationCardProps> = ({ location }) => {
+const LocationCard: FC<LocationCardProps> = ({ location, onClick }) => {
     const { classes } = useStyles();
     return (
-        <Card className={classes.card}>
+        <Card onClick={onClick} className={classes.card}>
             <CardMedia
                 component={"img"}
                 image={location.icon}
