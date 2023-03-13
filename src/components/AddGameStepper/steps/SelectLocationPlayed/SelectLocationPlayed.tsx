@@ -65,7 +65,8 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
 
     const cardRowProps: GridProps = {
         xs: 12,
-        sm: 6
+        sm: 6,
+        md: 4,
     };
 
     return (
@@ -109,7 +110,7 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
                 </Grid> : null}
             {displayResults?.filter(location => location.type === GameTypeEnum.HYBRID).length ?
                 <Grid container spacing={2} item xs={12}>
-                    <Grid item >
+                    <Grid item xs={12}>
                         <Typography variant={"h4"}>
                             {"Hybrid"}
                         </Typography>
