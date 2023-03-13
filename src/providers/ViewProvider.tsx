@@ -40,7 +40,7 @@ const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs = 
 
                 {/* if we're not @ root, show breadcrumbs. */}
                 {!(location.pathname === "/") && !!breadcrumbs.length &&
-                    <Grid className={classes.breadcrumbPadding} item xs={12}>
+                    <Grid className={desktopBreakpoint ? undefined : classes.breadcrumbPadding} item xs={12}>
                         <Breadcrumbs breadcrumbs={breadcrumbs} />
                     </Grid>
                 }
