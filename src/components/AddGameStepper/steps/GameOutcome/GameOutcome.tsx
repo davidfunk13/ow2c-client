@@ -4,7 +4,7 @@ interface GameOutcomeProps {
 
 }
 
-const GameOutcome: FC<GameOutcomeProps> = ({ }) => {
+const GameOutcome: FC<GameOutcomeProps> = () => {
     return (
         <>
             {"sdfwsdfsdf"}

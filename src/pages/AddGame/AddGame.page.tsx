@@ -1,8 +1,7 @@
 import { Button, Grid } from "@mui/material";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import AddGameStepper from "../../components/AddGameStepper/AddGameStepper";
-import HorizontalStepper from "../../components/HorizontalStepper/HorizontalStepper";
-import { setHorizontalStepperStepBackward, setHorizontalStepperStepForward, setHorizontalStepperStepNames } from "../../components/HorizontalStepper/horizontalStepperSlice";
+import { setHorizontalStepperStepBackward, setHorizontalStepperStepForward } from "../../components/HorizontalStepper/horizontalStepperSlice";
 import ViewProvider from "../../providers/ViewProvider";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectSession } from "../../redux/slices/sessionSlice";

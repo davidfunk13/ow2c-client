@@ -35,6 +35,9 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
         const results = filterLocations(newInputValue);
 
         setDisplayResults(results);
+        // const item = locations.filter(item => item.name === newInputValue);
+
+        setValue({ name: newInputValue } as Location);
 
         setInputValue(newInputValue);
     };
@@ -54,10 +57,12 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
         setDisplayResults([location]);
 
     };
+
     console.log({
         inputValue,
         value
     });
+
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -68,15 +73,15 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
                     onChange={handleOnChange}
                     inputValue={inputValue}
                     onInputChange={handleInputOnChange}
-
                     options={locations}
                     getOptionLabel={(option: Location) => option.name ?? ""}
-                    renderInput={(params) => <TextField
-                        onBlur={onBlur}
-
-                        {...params}
-                        label={"Select Location"}
-                    />}
+                    renderInput={(params) =>
+                        <TextField
+                            onBlur={onBlur}
+                            {...params}
+                            label={"Select Location"}
+                        />
+                    }
                 />
             </Grid>
             <Grid item xs={12}>
