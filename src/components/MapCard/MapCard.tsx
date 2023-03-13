@@ -18,7 +18,15 @@ const LocationCard: FC<LocationCardProps> = ({ location, onClick }) => {
                 height={"150"}
                 alt={location.name}
             />
-            <CardHeader title={location.name} subheader={location.type} />
+            <CardHeader
+                titleTypographyProps={{
+                    whiteSpace: "pre",
+                    noWrap: true,
+                    textOverflow: "ellipsis"
+                }}
+                title={location.name}
+                subheader={location.type}
+            />
         </Card>
     );
 };
