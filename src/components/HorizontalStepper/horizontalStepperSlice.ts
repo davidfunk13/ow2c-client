@@ -43,6 +43,8 @@ export const {
 } = horizonalStepperSlice.actions;
 
 export const selectHorizontalStepperStep = (state: RootState) => state.horizontalStepper.step;
+export const selectHorizontalStepperIsFirstStep = (state: RootState) => state.horizontalStepper.step === 0;
+export const selectHorizontalStepperIsLastStep = (state: RootState) => state.horizontalStepper.step < state.horizontalStepper.stepNames.length - 1;
 export const selectHorizontalStepperStepNames = (state: RootState) => state.horizontalStepper.stepNames;
 
 export default horizonalStepperSlice.reducer;

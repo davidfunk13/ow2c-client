@@ -5,21 +5,25 @@ import { Location } from "../../../../types/Location";
 import locations from "../../../../utils/Locations";
 import LocationCard from "../../../MapCard/MapCard";
 import { BaseSyntheticEvent } from "react";
+import StepperButton from "../../../StepperButtons/StepperButtons";
 interface SelectLocationPlayedProps {
 
 }
 
 const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
     const [value, setValue] = useState<Location | null>({} as Location);
-    const Combo = useRef();
-
-    const onBlur = (e: any) => {
-        (Combo.current! as any).inputValue = e.target.value;
-    };
-
+    
     const [inputValue, setInputValue] = useState("");
-
+    
     const [displayResults, setDisplayResults] = useState<Location[]>(locations);
+    
+    const Combo = useRef<{ inputValue: string }>(null);
+
+    const onBlur = (e: BaseSyntheticEvent) => {
+        if (Combo.current) {
+            Combo.current.inputValue = e.target.value;
+        }
+    };
 
     const filterLocations = (inputValue: string) => {
         if (!inputValue) {
@@ -33,12 +37,8 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
 
     const handleInputOnChange = (_: BaseSyntheticEvent, newInputValue: string, __: AutocompleteInputChangeReason) => {
         const results = filterLocations(newInputValue);
-
         setDisplayResults(results);
-        // const item = locations.filter(item => item.name === newInputValue);
-
         setValue({ name: newInputValue } as Location);
-
         setInputValue(newInputValue);
     };
 
@@ -51,17 +51,10 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
     };
 
     const handleCardOnClick = (location: Location) => {
-
         setValue(location);
         setInputValue(location.name);
         setDisplayResults([location]);
-
     };
-
-    console.log({
-        inputValue,
-        value
-    });
 
     const cardRowProps: GridProps = {
         xs: 12,
@@ -95,6 +88,7 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
                     {"Select Location"}
                 </Typography>
             </Grid>
+
             {displayResults?.filter(location => location.type === GameTypeEnum.CONTROL).length ?
                 <Grid container spacing={2} item xs={12}>
                     <Grid item xs={12}>
@@ -147,8 +141,10 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
                         </Grid>
                     )}
                 </Grid> : null}
+<StepperButton/>
         </Grid>
     );
 };
 
 export default SelectLocationPlayed;
+
