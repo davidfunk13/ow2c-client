@@ -6,17 +6,28 @@ import locations from "../../../../utils/Locations";
 import LocationCard from "../../../MapCard/MapCard";
 import { BaseSyntheticEvent } from "react";
 import StepperButton from "../../../StepperButtons/StepperButtons";
+import { useFormik } from "formik";
+import { validationSchema } from "./inputValidation";
+import submitFormWithPrevent from "../../../../utils/submitFormWithPrevent";
 interface SelectLocationPlayedProps {
 
 }
 
 const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
     const [value, setValue] = useState<Location | null>({} as Location);
-    
+
     const [inputValue, setInputValue] = useState("");
-    
+
+    const formik = useFormik({
+        initialValues: { location: "" },
+        // validationSchema: validationSchema,
+        onSubmit: (values) => console.log({values})
+    });
+
+    const { values, handleChange, handleSubmit, errors } = formik;
+
     const [displayResults, setDisplayResults] = useState<Location[]>(locations);
-    
+
     const Combo = useRef<{ inputValue: string }>(null);
 
     const onBlur = (e: BaseSyntheticEvent) => {
@@ -63,7 +74,9 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
     };
 
     return (
-        <Grid container spacing={2}>
+        <Grid container component={"form"} id={"select-location"} name={"select-location"} onSubmit={(e) => submitFormWithPrevent(e, handleSubmit)} spacing={2}>
+            <StepperButton />
+
             <Grid item xs={12} sm={6}>
                 <Autocomplete
                     id={"select-location-input"}
@@ -141,7 +154,6 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
                         </Grid>
                     )}
                 </Grid> : null}
-<StepperButton/>
         </Grid>
     );
 };

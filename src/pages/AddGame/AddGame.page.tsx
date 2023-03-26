@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import {  Grid } from "@mui/material";
 import { FC } from "react";
 import AddGameStepper from "../../components/AddGameStepper/AddGameStepper";
 import { setHorizontalStepperStepBackward, setHorizontalStepperStepForward } from "../../components/HorizontalStepper/horizontalStepperSlice";
@@ -30,8 +30,7 @@ const AddGamePage: FC<AddGamePageProps> = () => {
         <ViewProvider heading={"Add Game"} breadcrumbs={breadcrumbs(String(session.id))}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Button onClick={() => goBack()}>{"BACK"}</Button>
-                    <Button onClick={() => goFwd()}>{"FWD"}</Button>
+                  
                     <AddGameStepper />
                 </Grid>
             </Grid>

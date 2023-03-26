@@ -5,9 +5,10 @@ import React, { FC, ReactNode, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { resetHorizontalStepperSlice, selectHorizontalStepperStep, selectHorizontalStepperStepNames } from "./horizontalStepperSlice";
 import { Grid } from "@mui/material";
+import StepButtons from "../StepperButtons/StepperButtons";
 
 interface HorizontalStepperProps {
-    component: ReactNode
+    // component: ReactNode
 }
 
 interface LabelProps {
@@ -15,10 +16,11 @@ interface LabelProps {
     error?: boolean
 }
 
-const HorizontalStepper: FC<HorizontalStepperProps> = ({ component }) => {
+const HorizontalStepper: FC<HorizontalStepperProps> = () => {
     const dispatch = useAppDispatch();
     const horizontalStepperStep = useAppSelector(selectHorizontalStepperStep);
     const horizontalStepperStepNames = useAppSelector(selectHorizontalStepperStepNames);
+    const labelProps: LabelProps = {};
 
     useEffect(() => {
         return () => {
@@ -30,20 +32,16 @@ const HorizontalStepper: FC<HorizontalStepperProps> = ({ component }) => {
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Stepper activeStep={horizontalStepperStep}>
-                    {horizontalStepperStepNames.map((label, index) => {
-                        const labelProps: LabelProps = {};
-
-                        return (
-                            <Step key={label}>
-                                <StepLabel {...labelProps}>{label}</StepLabel>
-                            </Step>
-                        );
-                    })}
+                    {horizontalStepperStepNames.map(label =>
+                        <Step key={label}>
+                            <StepLabel {...labelProps}>{label}</StepLabel>
+                        </Step>
+                    )}
                 </Stepper>
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 {component}
-            </Grid>
+            </Grid> */}
         </Grid>
     );
 };

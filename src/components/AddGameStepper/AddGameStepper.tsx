@@ -5,7 +5,7 @@ import HorizontalStepper from "../HorizontalStepper/HorizontalStepper";
 import { selectHorizontalStepperStep, selectHorizontalStepperStepNames, setHorizontalStepperStepNames } from "../HorizontalStepper/horizontalStepperSlice";
 import GameOutcome from "./steps/GameOutcome/GameOutcome";
 import SelectLocationPlayed from "./steps/SelectLocationPlayed/SelectLocationPlayed";
-
+// import StepButtons from "../StepperButtons/StepperButtons";
 interface AddGameStepperProps {
 
 }
@@ -42,7 +42,9 @@ const AddGameStepper: FC<AddGameStepperProps> = () => {
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <HorizontalStepper component={<>{"Test"}</>} />
+                <HorizontalStepper />
+                {/* i want these out here eventually */}
+                {/* <StepButtons /> */}
             </Grid>
             <Grid item xs={12}>
                 {renderStep(current)}

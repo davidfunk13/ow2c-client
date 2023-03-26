@@ -1,7 +1,7 @@
 import { Button, Grid } from "@mui/material";
 import React, { FC } from "react";
-import { useAppSelector } from "../../redux/hooks";
-import { selectHorizontalStepperIsFirstStep, selectHorizontalStepperIsLastStep } from "../HorizontalStepper/horizontalStepperSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectHorizontalStepperIsFirstStep, selectHorizontalStepperIsLastStep, setHorizontalStepperStepBackward, setHorizontalStepperStepForward } from "../HorizontalStepper/horizontalStepperSlice";
 
 interface StepperButtonProps {
 
@@ -10,11 +10,13 @@ interface StepperButtonProps {
 const StepButtons: FC<StepperButtonProps> = () => {
     const isFirstStep = useAppSelector(selectHorizontalStepperIsFirstStep);
     const isLastStep = useAppSelector(selectHorizontalStepperIsLastStep);
-
+    const goFwd = () => dispatch(setHorizontalStepperStepForward());
+    const goBack = () => dispatch(setHorizontalStepperStepBackward());   
+    const dispatch = useAppDispatch();
     return (
         <Grid container justifyItems={"center"} spacing={2}>
             <Grid item xs={4}>
-                <Button type={"submit"}>
+                <Button type={"submit"} id={"select-location"}>
                     {isLastStep ? "Finish" : "Next"}
                 </Button>
             </ Grid>
