@@ -1,32 +1,46 @@
-import { Autocomplete, Grid, TextField, Typography, AutocompleteInputChangeReason, GridProps } from "@mui/material";
+import { Autocomplete, Grid, TextField, Typography, AutocompleteInputChangeReason, Button } from "@mui/material";
 import { FC, SyntheticEvent, useRef, useState } from "react";
-import { GameTypeEnum } from "../../../../enums/GameTypeEnum";
 import { Location } from "../../../../types/Location";
 import locations from "../../../../utils/Locations";
-import LocationCard from "../../../MapCard/MapCard";
 import { BaseSyntheticEvent } from "react";
-import StepperButton from "../../../StepperButtons/StepperButtons";
 import { useFormik } from "formik";
-import { validationSchema } from "./inputValidation";
 import submitFormWithPrevent from "../../../../utils/submitFormWithPrevent";
+import validationSchema from "./inputValidation";
+import { useAppDispatch } from "../../../../redux/hooks";
+import { setGameLocation } from "../../addGameSlice.";
+import { setHorizontalStepperStepForward } from "../../../HorizontalStepper/horizontalStepperSlice";
+
 interface SelectLocationPlayedProps {
 
 }
 
+interface SelectLocationValues {
+    location: string;
+}
+
+const initialValues: SelectLocationValues = { location: "" };
+
 const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
     const [value, setValue] = useState<Location | null>({} as Location);
+    const dispatch = useAppDispatch();
 
-    const [inputValue, setInputValue] = useState("");
+    const handleSubmitLocation = ({ location }: SelectLocationValues) => {
+        const a = locations.find((loc) => loc.name === location);
+        dispatch(setGameLocation(a));
+        dispatch(setHorizontalStepperStepForward());
+    };
 
     const formik = useFormik({
-        initialValues: { location: "" },
-        // validationSchema: validationSchema,
-        onSubmit: (values) => console.log({values})
+        initialValues,
+        validationSchema: validationSchema,
+        validateOnChange: false,
+        validateOnBlur: true,
+        onSubmit: (values) => handleSubmitLocation(values),
     });
 
-    const { values, handleChange, handleSubmit, errors } = formik;
+    const { values, setFieldValue, handleSubmit, errors } = formik;
 
-    const [displayResults, setDisplayResults] = useState<Location[]>(locations);
+    const [_, setDisplayResults] = useState<Location[]>(locations);
 
     const Combo = useRef<{ inputValue: string }>(null);
 
@@ -36,24 +50,11 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
         }
     };
 
-    const filterLocations = (inputValue: string) => {
-        if (!inputValue) {
-            return locations;
-        }
-
-        const results = locations.filter(item => item.name.toLowerCase().includes(inputValue.toLowerCase()));
-
-        return results;
-    };
-
     const handleInputOnChange = (_: BaseSyntheticEvent, newInputValue: string, __: AutocompleteInputChangeReason) => {
-        const results = filterLocations(newInputValue);
-        setDisplayResults(results);
-        setValue({ name: newInputValue } as Location);
-        setInputValue(newInputValue);
+        setFieldValue("location", newInputValue);
     };
 
-    const handleOnChange = (event: SyntheticEvent<Element, Event>, newValue: Location | null) => {
+    const handleOnChange = (_: SyntheticEvent<Element, Event>, newValue: Location | null) => {
         if (!newValue) {
             setDisplayResults(locations);
         }
@@ -61,29 +62,20 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
         setValue(newValue);
     };
 
-    const handleCardOnClick = (location: Location) => {
-        setValue(location);
-        setInputValue(location.name);
-        setDisplayResults([location]);
-    };
-
-    const cardRowProps: GridProps = {
-        xs: 12,
-        sm: 6,
-        md: 4,
-    };
-
     return (
         <Grid container component={"form"} id={"select-location"} name={"select-location"} onSubmit={(e) => submitFormWithPrevent(e, handleSubmit)} spacing={2}>
-            <StepperButton />
-
+            <Grid item xs={12}>
+                <Typography variant={"h1"}>
+                    {"Select Location"}
+                </Typography>
+            </Grid>
             <Grid item xs={12} sm={6}>
                 <Autocomplete
                     id={"select-location-input"}
                     value={value}
                     ref={Combo}
                     onChange={handleOnChange}
-                    inputValue={inputValue}
+                    inputValue={values.location}
                     onInputChange={handleInputOnChange}
                     options={locations}
                     getOptionLabel={(option: Location) => option.name ?? ""}
@@ -91,69 +83,16 @@ const SelectLocationPlayed: FC<SelectLocationPlayedProps> = () => {
                         <TextField
                             onBlur={onBlur}
                             {...params}
+                            error={Boolean(errors.location)}
+                            helperText={errors.location}
                             label={"Select Location"}
                         />
                     }
                 />
             </Grid>
             <Grid item xs={12}>
-                <Typography variant={"h1"}>
-                    {"Select Location"}
-                </Typography>
+                <Button type={"submit"} variant={"contained"} color={"primary"}>{"Next"}</Button>
             </Grid>
-
-            {displayResults?.filter(location => location.type === GameTypeEnum.CONTROL).length ?
-                <Grid container spacing={2} item xs={12}>
-                    <Grid item xs={12}>
-                        <Typography variant={"h4"}>
-                            {"Control"}
-                        </Typography>
-                    </Grid>
-                    {displayResults?.filter(location => location.type === GameTypeEnum.CONTROL).map(location =>
-                        <Grid key={`${location.name}-card`} item {...cardRowProps}>
-                            <LocationCard onClick={() => handleCardOnClick(location)} location={location} />
-                        </Grid>
-                    )}
-                </Grid> : null}
-            {displayResults?.filter(location => location.type === GameTypeEnum.HYBRID).length ?
-                <Grid container spacing={2} item xs={12}>
-                    <Grid item xs={12}>
-                        <Typography variant={"h4"}>
-                            {"Hybrid"}
-                        </Typography>
-                    </Grid>
-                    {displayResults?.filter(location => location.type === GameTypeEnum.HYBRID).map(location =>
-                        <Grid key={`${location.name}-card`} item {...cardRowProps}>
-                            <LocationCard onClick={() => handleCardOnClick(location)} location={location} />
-                        </Grid>
-                    )}
-                </Grid> : null}
-            {displayResults?.filter(location => location.type === GameTypeEnum.ESCORT).length ?
-                <Grid container spacing={2} item xs={12}>
-                    <Grid item xs={12}>
-                        <Typography variant={"h4"}>
-                            {"Escort"}
-                        </Typography>
-                    </Grid>
-                    {displayResults?.filter(location => location.type === GameTypeEnum.ESCORT).map(location =>
-                        <Grid key={`${location.name}-card`} item {...cardRowProps}>
-                            <LocationCard onClick={() => handleCardOnClick(location)} location={location} />
-                        </Grid>
-                    )}
-                </Grid> : null}
-            {displayResults?.filter(location => location.type === GameTypeEnum.PUSH).length ?
-                <Grid container spacing={2} item xs={12}>
-                    <Grid item xs={12}>
-                        <Typography variant={"h4"}>
-                            {"Push"}
-                        </Typography>
-                    </Grid>
-                    {displayResults?.filter(location => location.type === GameTypeEnum.PUSH).map(location =>
-                        <Grid key={`${location.name}-card`} item {...cardRowProps}>
-                            <LocationCard onClick={() => handleCardOnClick(location)} location={location} />
-                        </Grid>
-                    )}
-                </Grid> : null}
         </Grid>
     );
 };

@@ -5,11 +5,8 @@ import React, { FC, ReactNode, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { resetHorizontalStepperSlice, selectHorizontalStepperStep, selectHorizontalStepperStepNames } from "./horizontalStepperSlice";
 import { Grid } from "@mui/material";
-import StepButtons from "../StepperButtons/StepperButtons";
 
-interface HorizontalStepperProps {
-    // component: ReactNode
-}
+interface HorizontalStepperProps {}
 
 interface LabelProps {
     optional?: React.ReactNode,
@@ -31,7 +28,7 @@ const HorizontalStepper: FC<HorizontalStepperProps> = () => {
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <Stepper activeStep={horizontalStepperStep}>
+                <Stepper alternativeLabel activeStep={horizontalStepperStep}>
                     {horizontalStepperStepNames.map(label =>
                         <Step key={label}>
                             <StepLabel {...labelProps}>{label}</StepLabel>
@@ -39,9 +36,6 @@ const HorizontalStepper: FC<HorizontalStepperProps> = () => {
                     )}
                 </Stepper>
             </Grid>
-            {/* <Grid item xs={12}>
-                {component}
-            </Grid> */}
         </Grid>
     );
 };
