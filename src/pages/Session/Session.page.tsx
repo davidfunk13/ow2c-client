@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ViewProvider from "../../providers/ViewProvider";
+import ViewProvider from "../../components/ViewProvider/ViewProvider";
 import { useAppSelector } from "../../redux/hooks";
 import { selectSession } from "../../redux/slices/sessionSlice";
 import breadcrumbs from "./Session.page.breadcrumbs";

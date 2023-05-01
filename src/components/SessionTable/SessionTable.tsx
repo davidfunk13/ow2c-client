@@ -51,7 +51,7 @@ const SessionTable: FC<SessionTableProps> = ({ loading, rows }) => {
     return (
         <Box>
             <DataGrid
-                disableSelectionOnClick
+                disableRowSelectionOnClick
                 autoHeight
                 loading={loading}
                 columns={renderColumns}

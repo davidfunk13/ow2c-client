@@ -3,10 +3,10 @@ import type { RootState } from "../../redux/store";
 import Session from "../../types/Session";
 
 interface SessionState {
-    session: Session
+    session: Session | null;
 }
 
-const initialState: SessionState = { session: {} as Session };
+const initialState: SessionState = { session: null };
 
 export const sessionSlice = createSlice({
     name: "session",
@@ -16,6 +16,10 @@ export const sessionSlice = createSlice({
             sessionStorage.setItem("session", JSON.stringify(action.payload));
             state.session = action.payload;
         },
+        removeSelectedSession: (state) => {
+            sessionStorage.removeItem("session");
+            state.session = initialState.session;
+        },
         resetSessionSlice: (state) => {
             sessionStorage.removeItem("session");
             state.session = initialState.session;
@@ -23,7 +27,7 @@ export const sessionSlice = createSlice({
     },
 });
 
-export const { setSelectedSession, resetSessionSlice } = sessionSlice.actions;
+export const { setSelectedSession, removeSelectedSession, resetSessionSlice } = sessionSlice.actions;
 
 export const selectSession = (state: RootState) => state.session.session;
 

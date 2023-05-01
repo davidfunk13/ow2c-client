@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { FC, SyntheticEvent } from "react";
-import ViewProvider from "../../providers/ViewProvider";
+import ViewProvider from "../../components/ViewProvider/ViewProvider";
 import { useAppSelector } from "../../redux/hooks";
 import { useCreateSessionMutation, useGetSessionsQuery } from "../../redux/services/sessionApi";
 import { selectBattletagId } from "../../redux/slices/battletagSlice";

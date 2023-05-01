@@ -1,4 +1,4 @@
-import { makeStyles } from "../utils/makeStyles";
+import { makeStyles } from "../../utils/makeStyles";
 
 const useStyles = makeStyles({ name: "ViewProvider Styles" })((theme) => ({
     mobileContainer: {

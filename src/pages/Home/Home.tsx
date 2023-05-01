@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { FC } from "react";
-import ViewProvider from "../../providers/ViewProvider";
+import ViewProvider from "../../components/ViewProvider/ViewProvider";
 import breadcrumbs from "./Home.page.breadcrumbs";
 
 interface HomePageProps { };

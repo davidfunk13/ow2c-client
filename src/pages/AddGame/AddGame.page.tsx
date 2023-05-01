@@ -2,7 +2,7 @@ import {  Grid } from "@mui/material";
 import { FC } from "react";
 import AddGameStepper from "../../components/AddGameStepper/AddGameStepper";
 import { setHorizontalStepperStepBackward, setHorizontalStepperStepForward } from "../../components/HorizontalStepper/horizontalStepperSlice";
-import ViewProvider from "../../providers/ViewProvider";
+import ViewProvider from "../../components/ViewProvider/ViewProvider";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectSession } from "../../redux/slices/sessionSlice";
 import breadcrumbs from "./AddGame.page.breadcrumbs";

@@ -4,13 +4,14 @@ import { FC, ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import useStyles from "./ViewProvider.styles";
 import clsx from "clsx";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
-import Snackbar from "../components/Snackbar/Snackbar";
-import { useAppSelector } from "../redux/hooks";
-import Breadcrumb from "../types/Breadcrumb";
-import { selectBattletagName } from "../redux/slices/battletagSlice";
-import { selectTheme } from "../redux/slices/themeSlice";
-import { parseTheme } from "./MuiThemeProvider/MuiThemeProvider";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import Snackbar from "../Snackbar/Snackbar";
+import { useAppSelector } from "../../redux/hooks";
+import Breadcrumb from "../../types/Breadcrumb";
+import { selectBattletagName } from "../../redux/slices/battletagSlice";
+import { selectTheme } from "../../redux/slices/themeSlice";
+import { parseTheme } from "../../providers/MuiThemeProvider/MuiThemeProvider";
+import UserBox from "../UserBox/UserBox";
 
 interface ViewProviderProps {
     children: ReactNode
@@ -18,7 +19,7 @@ interface ViewProviderProps {
     heading: string
 }
 
-const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs = [] }: ViewProviderProps) => {
+const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs = [] }: ViewProviderProps): JSX.Element => {
     const location = useLocation();
     const theme = useAppSelector(selectTheme);
     const currentTheme = parseTheme(theme);
@@ -28,8 +29,12 @@ const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs = 
 
     return (
         <Box component={"main"} className={clsx(desktopBreakpoint && battletagName ? classes.desktopContainer : classes.mobileContainer)}>
+            
             {/* padding on view that nudges content below navbar. */}
             <Toolbar />
+
+            {/* contains nametag and session tag */}
+            <UserBox />
 
             <Grid container>
                 <Grid item xs={12}>

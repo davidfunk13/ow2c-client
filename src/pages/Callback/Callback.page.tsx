@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import ViewProvider from "../../providers/ViewProvider";
+import ViewProvider from "../../components/ViewProvider/ViewProvider";
 import { useAppDispatch } from "../../redux/hooks";
 import { useGetLoginQuery } from "../../redux/services/authApi";
 import { setBattletag } from "../../redux/slices/battletagSlice";
