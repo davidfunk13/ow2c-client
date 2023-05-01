@@ -10,7 +10,8 @@ interface SessionTagProps {
 const SessionTag: FC<SessionTagProps> = (): JSX.Element | null => {
     const session = useAppSelector(selectSession);
     const dispatch = useAppDispatch();
-    
+    const removalDisabled = window.location.pathname.includes("session");
+
     return session ?
         <Grid container item xs={"auto"} alignItems={"center"}>
             <Grid item xs={"auto"}>
@@ -19,7 +20,7 @@ const SessionTag: FC<SessionTagProps> = (): JSX.Element | null => {
                 </Typography>
             </Grid>
             <Grid item xs={"auto"}>
-                <IconButton size={"small"} onClick={() => dispatch(removeSelectedSession())}>
+                <IconButton size={"small"} disabled={removalDisabled} onClick={() => dispatch(removeSelectedSession())}>
                     <Close fontSize={"small"} />
                 </IconButton>
             </Grid>

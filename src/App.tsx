@@ -27,7 +27,7 @@ const App: FC<AppProps> = () => {
     const id = localStorage.getItem("id");
     const battletag = localStorage.getItem("battletag");
     const battletagId = localStorage.getItem("battletag_id");
-    const session = sessionStorage.getItem("session");
+    const session = localStorage.getItem("session");
 
     if (session) {
       dispatch(setSelectedSession(JSON.parse(session)));

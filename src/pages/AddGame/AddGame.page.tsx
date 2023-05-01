@@ -27,7 +27,7 @@ const AddGamePage: FC<AddGamePageProps> = () => {
     // victory?
 
     return (
-        <ViewProvider heading={"Add Game"} breadcrumbs={breadcrumbs(String(session.id))}>
+        <ViewProvider heading={"Add Game"} breadcrumbs={breadcrumbs(String(session?.id))}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                   

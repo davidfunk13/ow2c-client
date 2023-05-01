@@ -13,15 +13,15 @@ export const sessionSlice = createSlice({
     initialState,
     reducers: {
         setSelectedSession: (state, action: PayloadAction<Session>) => {
-            sessionStorage.setItem("session", JSON.stringify(action.payload));
+            localStorage.setItem("session", JSON.stringify(action.payload));
             state.session = action.payload;
         },
         removeSelectedSession: (state) => {
-            sessionStorage.removeItem("session");
+            localStorage.removeItem("session");
             state.session = initialState.session;
         },
         resetSessionSlice: (state) => {
-            sessionStorage.removeItem("session");
+            localStorage.removeItem("session");
             state.session = initialState.session;
         }
     },
@@ -30,5 +30,6 @@ export const sessionSlice = createSlice({
 export const { setSelectedSession, removeSelectedSession, resetSessionSlice } = sessionSlice.actions;
 
 export const selectSession = (state: RootState) => state.session.session;
+export const selectSessionId = (state: RootState) => state.session.session?.id;
 
 export default sessionSlice.reducer;

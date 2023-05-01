@@ -28,16 +28,6 @@ const AuthButton: FC = (): JSX.Element => {
         (
             <Button
                 size={"small"}
-                aria-label={"Login Button"}
-                color={"inherit"}
-                variant={"outlined"}
-                href={authURI.toString()}
-            >
-                {"Login"}
-            </Button>
-        ) : (
-            <Button
-                size={"small"}
                 aria-label={"Logout Button"}
                 color={"inherit"}
                 variant={"outlined"}
@@ -45,6 +35,16 @@ const AuthButton: FC = (): JSX.Element => {
 
             >
                 {"Logout"}
+            </Button>
+        ) : (
+            <Button
+                size={"small"}
+                aria-label={"Login Button"}
+                color={"inherit"}
+                variant={"outlined"}
+                href={authURI.toString()}
+            >
+                {"Login"}
             </Button>
         );
 };

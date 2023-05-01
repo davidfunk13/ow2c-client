@@ -11,7 +11,7 @@ const SessionPage: FC<SessionPageProps> = () => {
     const session = useAppSelector(selectSession);
 
     return (
-        <ViewProvider heading={"Session"} breadcrumbs={breadcrumbs(session.id)}>
+        <ViewProvider heading={"Session"} breadcrumbs={breadcrumbs(session?.id ?? "")}>
 
         </ViewProvider>
     );

@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../redux/store";
-import GameOutcomeEnum from "../../types/GameOutcomeEnum";
+import GameResultEnum from "../../types/GameResultEnum";
 import { Location } from "../../types/Location";
 
 interface AddGameState {
     location: Location
-    outcome: GameOutcomeEnum | null
+    result: GameResultEnum | null
 }
 
 const initialState: AddGameState = {
     location: {} as Location,
-    outcome: null
+    result: null
 };
 
 export const addGameSlice = createSlice({
@@ -20,15 +20,16 @@ export const addGameSlice = createSlice({
         setGameLocation: (state, action) => {
             state.location = action.payload;
         },
-        setGameOutcome: (state, action) => {
-            state.outcome = action.payload;
+        setGameResult: (state, action) => {
+            state.result = action.payload;
         }
     },
 });
 
-export const { setGameLocation, setGameOutcome } = addGameSlice.actions;
+export const { setGameLocation, setGameResult } = addGameSlice.actions;
 
 export const selectGameLocation = (state: RootState) => state.addGame.location;
-export const selectGameOutcome = (state: RootState) => state.addGame.outcome;
+export const selectGameLocationName = (state: RootState) => state.addGame.location.name;
+export const selectGameResult = (state: RootState) => state.addGame.result;
 
 export default addGameSlice.reducer;
