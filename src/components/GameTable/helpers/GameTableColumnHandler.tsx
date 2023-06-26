@@ -11,7 +11,18 @@ const GameTableColumnHandler = (): GridColDef[] => [
     {
         field: "result",
         headerName: "Result",
-        valueGetter: ({ value }: GridRenderCellParams<Game>) => Boolean(value) ? "Win" : "Loss",
+        valueGetter: ({row}: GridRenderCellParams<Game>) =>{
+            switch (row.result) {
+                case 0:
+                    return "Loss";
+                case 1:
+                    return "Win";
+                case 2:
+                    return "Draw";
+                default:
+                    return "Unknown";
+            }
+        },
         flex: 1,
     },
     {
