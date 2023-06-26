@@ -47,6 +47,10 @@ export const gameApi = api.injectEndpoints({
     })
 });
 
-export const { useGetGamesQuery, useDeleteGameMutation, useCreateGameMutation } = gameApi;
+export const {
+    useGetGamesQuery,
+    useDeleteGameMutation,
+    useCreateGameMutation
+} = gameApi;
 
 export const { endpoints: { getGames, createGame, deleteGame } } = gameApi;

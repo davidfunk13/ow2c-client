@@ -6,7 +6,7 @@ import { setHorizontalStepperStepBackward } from "../../../HorizontalStepper/hor
 import GameResultEnum from "../../../../types/GameResultEnum";
 import submitFormWithPrevent from "../../../../utils/submitFormWithPrevent";
 import validationSchema from "./inputValidation";
-import { useCreateGameMutation } from "../../../../redux/services/gameApi";
+// import { useCreateGameMutation } from "../../../../redux/services/gameApi";
 import { selectBattletagId } from "../../../../redux/slices/battletagSlice";
 import { selectSession, selectSessionId } from "../../../../redux/slices/sessionSlice";
 import { selectGameLocation, selectGameLocationName } from "../../addGameSlice.";
@@ -23,7 +23,7 @@ const initialValues: GameResultValues = { result: null };
 
 const GameResult: FC<GameResultProps> = () => {
     const dispatch = useAppDispatch();
-    const [createGame] = useCreateGameMutation();
+    // const [createGame] = useCreateGameMutation();
     const battletagId = useAppSelector(selectBattletagId);
     const sessionId = useAppSelector(selectSessionId) ?? "";
     const locationName = useAppSelector(selectGameLocationName) ?? "";
@@ -43,11 +43,11 @@ const GameResult: FC<GameResultProps> = () => {
                 result
             };
 
-            createGame({
-                battletagId,
-                sessionId,
-                gameData,
-            });
+            // createGame({
+            //     battletagId,
+            //     sessionId,
+            //     gameData,
+            // });
         }
     });
 
