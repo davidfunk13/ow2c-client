@@ -39,7 +39,7 @@ export const gameApi = api.injectEndpoints({
         }),
         deleteGame: build.mutation({
             query: ({ battletagId, sessionId, gameId }) => ({
-                url: `/battletag/${battletagId}/session/${sessionId}/games/${gameId}`,
+                url: `/battletag/${battletagId}/session/${sessionId}/game/${gameId}`,
                 method: "DELETE",
             }),
             invalidatesTags: ["Games"],

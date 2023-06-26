@@ -10,6 +10,7 @@ import validationSchema from "./inputValidation";
 import { selectBattletagId } from "../../../../redux/slices/battletagSlice";
 import { selectSession, selectSessionId } from "../../../../redux/slices/sessionSlice";
 import { selectGameLocation, selectGameLocationName } from "../../addGameSlice.";
+import {  useCreateGameMutation } from "../../../../redux/services/gameApi";
 
 interface GameResultProps {
 
@@ -23,7 +24,7 @@ const initialValues: GameResultValues = { result: null };
 
 const GameResult: FC<GameResultProps> = () => {
     const dispatch = useAppDispatch();
-    // const [createGame] = useCreateGameMutation();
+    const [createGame] = useCreateGameMutation();
     const battletagId = useAppSelector(selectBattletagId);
     const sessionId = useAppSelector(selectSessionId) ?? "";
     const locationName = useAppSelector(selectGameLocationName) ?? "";
@@ -43,11 +44,11 @@ const GameResult: FC<GameResultProps> = () => {
                 result
             };
 
-            // createGame({
-            //     battletagId,
-            //     sessionId,
-            //     gameData,
-            // });
+            createGame({
+                battletagId,
+                sessionId,
+                gameData,
+            });
         }
     });
 

@@ -10,6 +10,7 @@ import navigationDrawerSlice from "../components/NavigationDrawer/navigationDraw
 import notificationsSlice from "./slices/notificationsSlice";
 import sessionSlice from "./slices/sessionSlice";
 import themeSlice from "./slices/themeSlice";
+import gameSlice from "./slices/gameSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     navigationDrawer: navigationDrawerSlice,
     notifications: notificationsSlice,
     session: sessionSlice,
+    game: gameSlice,
     theme: themeSlice,
     [api.reducerPath]: api.reducer,
   },
