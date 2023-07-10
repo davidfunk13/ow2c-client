@@ -2,10 +2,10 @@ import { FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ViewProvider from "../../components/ViewProvider/ViewProvider";
 import { useAppDispatch } from "../../redux/hooks";
-import { useGetLoginQuery } from "../../redux/services/authApi";
 import { setBattletag } from "../../redux/slices/battletagSlice";
 import { setErrorSnackbar, setSuccessSnackbar } from "../../redux/slices/notificationsSlice";
 import breadcrumbs from "./Callback.page.breadcrumbs";
+import login from "../../redux/thunks/auth/login";
 
 interface CallbackPageProps { }
 
@@ -19,20 +19,20 @@ const CallbackPage: FC<CallbackPageProps> = () => {
         if (!code) {
             dispatch(setErrorSnackbar("Something went wrong."));
         }
+        dispatch(login(code));
     }, [code, dispatch]);
 
-    const { data } = useGetLoginQuery(code);
-
-    useEffect(() => {
-        if (data?.battletag) {
-            localStorage.setItem("id", data.id);
-            localStorage.setItem("battletag", data.battletag);
-            localStorage.setItem("battletag_id", JSON.stringify(data.blizz_id));
-            dispatch(setBattletag(data));
-            dispatch(setSuccessSnackbar("Battletag successfully logged in."));
-            return navigate("/");
-        }
-    }, [data, dispatch, navigate]);
+    // useEffect(() => {
+    //     console.log(data);
+    //     if (data?.battletag) {
+    //         localStorage.setItem("id", data.id);
+    //         localStorage.setItem("battletag", data.battletag);
+    //         localStorage.setItem("battletag_id", JSON.stringify(data.blizz_id));
+    //         dispatch(setBattletag(data));
+    //         dispatch(setSuccessSnackbar("Battletag successfully logged in."));
+    //         return navigate("/");
+    //     }
+    // }, [data, dispatch, navigate]);
 
     return (
         <ViewProvider breadcrumbs={breadcrumbs} heading={"Callback"}>

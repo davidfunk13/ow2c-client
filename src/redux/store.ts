@@ -2,30 +2,21 @@
 import { api } from "./services/api";
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import addGameSlice from "../components/AddGameStepper/addGameSlice.";
 import battletagSlice from "./slices/battletagSlice";
-import horizontalStepperSlice from "../components/HorizontalStepper/horizontalStepperSlice";
-import modalSlice from "../components/Modal/modalSlice";
 import navigationDrawerSlice from "../components/NavigationDrawer/navigationDrawerSlice";
 import notificationsSlice from "./slices/notificationsSlice";
-import sessionSlice from "./slices/sessionSlice";
 import themeSlice from "./slices/themeSlice";
-import gameSlice from "./slices/gameSlice";
+import authSlice from "./slices/auth";
 
 export const store = configureStore({
   reducer: {
-    addGame: addGameSlice,
+    auth: authSlice,
     battletag: battletagSlice,
-    horizontalStepper: horizontalStepperSlice,
-    modal: modalSlice,
     navigationDrawer: navigationDrawerSlice,
     notifications: notificationsSlice,
-    session: sessionSlice,
-    game: gameSlice,
     theme: themeSlice,
-    [api.reducerPath]: api.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 });
 
 setupListeners(store.dispatch);

@@ -7,7 +7,6 @@ interface HomePageProps { };
 
 const HomePage: FC<HomePageProps> = () => {
     return (
-
         <ViewProvider heading={"Home"} breadcrumbs={breadcrumbs}>
             <Typography>{"Yo"}</Typography>
         </ViewProvider>

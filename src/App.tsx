@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar/Navbar";
 import DesktopNavigationMenu from "./components/DesktopNavigationMenu/DesktopNavigationMenu";
 import AppRouter from "./AppRouter";
 import MobileNavigationMenu from "./components/NavigationDrawer/NavigationDrawer";
-import { setSelectedSession } from "./redux/slices/sessionSlice";
 import { selectTheme } from "./redux/slices/themeSlice";
 import { parseTheme } from "./providers/MuiThemeProvider/MuiThemeProvider";
 
@@ -27,11 +26,6 @@ const App: FC<AppProps> = () => {
     const id = localStorage.getItem("id");
     const battletag = localStorage.getItem("battletag");
     const battletagId = localStorage.getItem("battletag_id");
-    const session = localStorage.getItem("session");
-
-    if (session) {
-      dispatch(setSelectedSession(JSON.parse(session)));
-    }
 
     if (battletag && battletagId && id) {
       dispatch(setBattletag({

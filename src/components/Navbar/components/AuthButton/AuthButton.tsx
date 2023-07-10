@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { resetBattletagSlice, selectBattletagName } from "../../../../redux/slices/battletagSlice";
 import authURI from "../../../../utils/authURI";
 import { FC, useEffect } from "react";
-import { resetSessionSlice } from "../../../../redux/slices/sessionSlice";
 import { useLogoutMutation } from "../../../../redux/services/authApi";
 import { setSuccessSnackbar } from "../../../../redux/slices/notificationsSlice";
 
@@ -20,7 +19,6 @@ const AuthButton: FC = (): JSX.Element => {
 
     const logout = () => {
         dispatch(resetBattletagSlice());
-        dispatch(resetSessionSlice());
         performLogout(null);
     };
 
