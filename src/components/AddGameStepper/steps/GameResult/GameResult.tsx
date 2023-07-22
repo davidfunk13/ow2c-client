@@ -10,7 +10,8 @@ import validationSchema from "./inputValidation";
 import { selectBattletagId } from "../../../../redux/slices/battletagSlice";
 import { selectSession, selectSessionId } from "../../../../redux/slices/sessionSlice";
 import { selectGameLocation, selectGameLocationName } from "../../addGameSlice.";
-import {  useCreateGameMutation } from "../../../../redux/services/gameApi";
+import { useCreateGameMutation } from "../../../../redux/services/gameApi";
+import { useNavigate } from "react-router-dom";
 
 interface GameResultProps {
 
@@ -28,6 +29,7 @@ const GameResult: FC<GameResultProps> = () => {
     const battletagId = useAppSelector(selectBattletagId);
     const sessionId = useAppSelector(selectSessionId) ?? "";
     const locationName = useAppSelector(selectGameLocationName) ?? "";
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues,
@@ -49,6 +51,8 @@ const GameResult: FC<GameResultProps> = () => {
                 sessionId,
                 gameData,
             });
+
+            navigate(`/session/${sessionId}`);
         }
     });
 

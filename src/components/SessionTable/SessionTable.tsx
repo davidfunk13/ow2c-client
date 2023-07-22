@@ -7,6 +7,7 @@ import sessionTableColumnHandler from "./helpers/SessionTableColumnHandler";
 import Modal from "../Modal/Modal";
 import { setSelectedSession } from "../../redux/slices/sessionSlice";
 import { initialState, selectModalItem, selectModalOpen, setModalItem, setModalOpen } from "../Modal/modalSlice";
+import { useNavigate } from "react-router-dom";
 
 interface SessionTableProps {
     loading: boolean
@@ -17,6 +18,7 @@ const SessionTable: FC<SessionTableProps> = ({ loading, rows }) => {
     const session = useAppSelector(selectModalItem) as Session;
     const dispatch = useAppDispatch();
     const modalOpen = useAppSelector(selectModalOpen);
+    const navigate = useNavigate();
 
     const handleCloseModal = () => {
         dispatch(setModalOpen(false));
@@ -26,6 +28,7 @@ const SessionTable: FC<SessionTableProps> = ({ loading, rows }) => {
         dispatch(setSelectedSession(session));
         dispatch(setModalItem(initialState.item));
         dispatch(setModalOpen(false));
+        navigate(`/session/${session.id}`);
     };
 
     const renderColumns = sessionTableColumnHandler();
@@ -51,7 +54,7 @@ const SessionTable: FC<SessionTableProps> = ({ loading, rows }) => {
     return (
         <Box>
             <DataGrid
-                disableRowSelectionOnClick
+                disableSelectionOnClick
                 autoHeight
                 loading={loading}
                 columns={renderColumns}

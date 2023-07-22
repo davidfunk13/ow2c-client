@@ -4,10 +4,11 @@ import { useAppSelector } from "../../redux/hooks";
 import { selectSession } from "../../redux/slices/sessionSlice";
 import breadcrumbs from "./Session.page.breadcrumbs";
 import GameTable from "../../components/GameTable/GameTable";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import ItemBox from "../../components/ItemBox/ItemBox";
 import { useGetGamesQuery } from "../../redux/services/gameApi";
 import { selectBattletagId } from "../../redux/slices/battletagSlice";
+import { useNavigate } from "react-router-dom";
 
 interface SessionPageProps { }
 
@@ -15,6 +16,8 @@ const SessionPage: FC<SessionPageProps> = () => {
 
     const session = useAppSelector(selectSession);
     const battletagId = useAppSelector(selectBattletagId);
+    const navigate = useNavigate();
+    
     const { data = [], isLoading } = useGetGamesQuery({
         battletagId: battletagId,
         sessionId: session?.id ?? ""
@@ -22,6 +25,9 @@ const SessionPage: FC<SessionPageProps> = () => {
 
     return (
         <ViewProvider heading={"Session"} breadcrumbs={breadcrumbs(session?.id ?? "")}>
+            <Button onClick={()=>navigate(`/session/${session?.id}/add-game`)} >
+                {"Add Game"}
+            </Button>
             <Grid item xs={12}>
                 <ItemBox boxTitle={"Current Games"}>
                     <Grid item xs={12}>
