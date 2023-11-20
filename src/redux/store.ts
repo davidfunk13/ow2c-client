@@ -2,9 +2,7 @@
 import { api } from "./services/api";
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import addGameSlice from "../components/AddGameStepper/addGameSlice.";
 import battletagSlice from "./slices/battletagSlice";
-import horizontalStepperSlice from "../components/HorizontalStepper/horizontalStepperSlice";
 import modalSlice from "../components/Modal/modalSlice";
 import navigationDrawerSlice from "../components/NavigationDrawer/navigationDrawerSlice";
 import notificationsSlice from "./slices/notificationsSlice";
@@ -14,9 +12,7 @@ import gameSlice from "./slices/gameSlice";
 
 export const store = configureStore({
   reducer: {
-    addGame: addGameSlice,
     battletag: battletagSlice,
-    horizontalStepper: horizontalStepperSlice,
     modal: modalSlice,
     navigationDrawer: navigationDrawerSlice,
     notifications: notificationsSlice,

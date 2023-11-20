@@ -39,9 +39,6 @@ const Navigation: FC<INavigation> = () => {
                     name={"Session"}
                     IconComponent={DashboardIcon}
                 >
-                    <List>
-                        <NavigationSubItem text={"Add Game"} to={`/session/${session.id}/add-game`} />
-                    </List>
                 </NavigationItem>
             }
         </List>
